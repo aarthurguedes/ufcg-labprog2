@@ -1,5 +1,8 @@
 package lab5;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
 * Representação de um fornecedor de lanches, que possui nome (identificação única), email e telefone.
 *
@@ -16,25 +19,13 @@ public class Fornecedor {
 	*/
 	private String email;
 	/**
-	* Telefone do cliente.
+	* Telefone do fornecedor.
 	*/
 	private String telefone;
-	
 	/**
-	* Método auxiliar que lança a exceção mais adequada se algum dos parâmetros passados para a construção do Fornecedor for inválido 
-	* (nulo ou vazio).
-	* 
-	* @param nome o nome do fornecedor
-	* @param email o email do fornecedor
-	* @param telefone o telefone do fornecedor
-	*/ 
-	private void verificaParametros(String nome, String email, String telefone) {
-		if (nome == null || email == null || telefone == null) {
-			throw new NullPointerException("Objeto null passado como parâmetro.");
-		} else if (nome.trim().equals("") || email.trim().equals("") || telefone.trim().equals("")) {
-			throw new IllegalArgumentException("String vazia passada como parâmetro");
-		}
-	}
+	* Mapa de produtos do fornecedor.
+	*/
+	private Map<String, Produto> produtos;
 	
 	/**
 	* Constrói o fornecedor a partir do seu nome, email e telefone.
@@ -44,10 +35,10 @@ public class Fornecedor {
 	* @param telefone o telefone do fornecedor
 	*/
 	public Fornecedor(String nome, String email, String telefone) {
-		verificaParametros(nome, email, telefone);
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
+		this.produtos = new HashMap<>();
 	}
 
 	/**
@@ -93,7 +84,21 @@ public class Fornecedor {
 	}
 
 	/**
-	* Retorna a String que representa o fornecedor com todos os seus atributos (nome, email e telefone).
+	 * @return os produtos do fornecedor
+	 */
+	public Map<String, Produto> getProdutos() {
+		return produtos;
+	}
+
+	/**
+	 * @param produtos os novos produtos do fornecedor
+	 */
+	public void setProdutos(Map<String, Produto> produtos) {
+		this.produtos = produtos;
+	}
+
+	/**
+	* Retorna a String que representa o fornecedor no formato: nome - email - telefone.
 	* 
 	* @return a representação em String do fornecedor.
 	*/
@@ -138,6 +143,4 @@ public class Fornecedor {
 			return false;
 		return true;
 	}
-	
-	
 }

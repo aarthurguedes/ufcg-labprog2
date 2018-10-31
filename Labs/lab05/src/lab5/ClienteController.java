@@ -1,11 +1,11 @@
 package lab5;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 /**
 * Representação de um controlador para os clientes, responsável por cadastrá-los, representá-los textualmente, editar os seus cadastros
@@ -21,27 +21,46 @@ public class ClienteController {
 	private Map<String, Cliente> clientes;
 	
 	/**
-	* Constrói o controle a partir do mapa de clientes. 
-	*
-	*/
-	public ClienteController() {
-		this.clientes = new HashMap<>();
+	* Método auxiliar que verifica os parâmetros passados para a construção do cliente e lança a exceção adequada quando necessário.
+	* 
+	* @param cpf o cpf do cliente
+	* @param nome o nome do cliente
+	* @param email o email do cliente
+	* @param localizacao o local de trabalho do cliente
+	*/ 
+	public void verificaAtributosCliente(String cpf, String nome, String email, String localizacao) {
+		String msgErro = "Erro no cadastro do cliente: ";
+		
+		if (nome.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
+		} else if (email.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "email nao pode ser vazio ou nulo.");
+		} else if(localizacao.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "localizacao nao pode ser vazia ou nula.");
+		} else if (clientes.containsKey(cpf)) { 
+			throw new IllegalArgumentException(msgErro + "cliente ja existe.");
+		} else if (cpf.length() > 11 || cpf.length() < 11) {
+			throw new IllegalArgumentException(msgErro + "cpf invalido.");
+		}
 	}
 	
 	/**
-	* Método auxiliar que lança a exceção mais adequada a partir do cpf passado como parâmetro, nos casos em que esse não está cadastrado.
+	* Método auxiliar que verifica os parâmetros passados para a edição do cliente e lança a exceção adequada quando necessário.
 	* 
-	* @param cpf o cpf do cliente
-	*/
-	private void verificaCpf(String cpf) {
-		if (!clientes.containsKey(cpf)) {
-			if (cpf == null) { 
-				throw new NullPointerException("Cliente não encontrado");
-			} else if (cpf.trim().equals("")) {
-				throw new IllegalArgumentException("Cliente não encontrado");
-			} else {
-				throw new NoSuchElementException("Cliente não encontrado");
-			}
+	* @param atributo o atributo o qual se quer editar
+	* @param novoValor o novo valor para o atributo
+	*/ 
+	private void verificaDadosParaEdicao(String cpf, String atributo, String novoValor) {
+		String msg = "Erro na edicao do cliente:";
+		
+		if (atributo.trim().equals("")) {
+			throw new IllegalArgumentException(msg + " atributo nao pode ser vazio ou nulo.");
+		} else if (novoValor.trim().equals("")) {
+			throw new IllegalArgumentException(msg + " novo valor nao pode ser vazio ou nulo.");
+		} else if (!clientes.containsKey(cpf)) {
+			throw new IllegalArgumentException(msg + " cliente nao existe."); 
+		} else if ((!atributo.equals("nome")) && (!atributo.equals("email")) && (!atributo.equals("localizacao"))) {
+			throw new IllegalArgumentException(msg + " atributo nao existe.");
 		}
 	}
 	
@@ -50,34 +69,38 @@ public class ClienteController {
 	* 
 	* @param listaClientes a lista que armazenará os clientes
 	*/
-	private void adicionarClientesEmLista(List<String> listaClientes) {
+	private void adicionaClientesEmLista(List<String> listaClientes) {
 		for (Cliente c: clientes.values()) {
-			if (c == null) {
-				throw new NullPointerException("Cliente inválido encontrado");
-			} else {
+			if (c != null) {
 				listaClientes.add(c.toString() + " | ");
 			}
 		} 
-		
 		Collections.sort(listaClientes);
 	}
 
 	/**
-	* Verifica se o cliente já está cadastrado a partir do cpf passado como parâmetro, caso esteja, lança uma exceção, caso contrário, 
-	* cadastra o cliente. 
+	* Constrói o controle a partir do mapa de clientes. 
+	*
+	*/
+	public ClienteController() {
+		this.clientes = new HashMap<>();
+	}
+
+	/**
+	* Verifica se os parâmetros passados são válidos e, caso sejam, cadastra o cliente, caso contrário, lança uma exceção.
 	*
 	* @param cpf o cpf do cliente
 	* @param nome o nome do cliente
 	* @param email o email do cliente
 	* @param localizacao o local de trabalho do cliente
+	* @return o cpf do cliente
 	*/
-	public void cadastrarCliente(String cpf, String nome, String email, String localizacao) {
-		if (clientes.containsKey(cpf)) {
-			throw new IllegalArgumentException("Cliente já cadastrado");
-		}
+	public String adicionaCliente(String cpf, String nome, String email, String localizacao) {
+		verificaAtributosCliente(cpf, nome, email, localizacao);
 		
 		Cliente cliente = new Cliente(cpf, nome, email, localizacao);
 		clientes.put(cpf, cliente);
+		return cpf;
 	}
 	
 	/**
@@ -87,8 +110,10 @@ public class ClienteController {
 	* @param cpf o cpf do cliente
 	* @return uma representação em String do cliente, se o mesmo estiver cadastrado.
 	*/
-	public String exibirCliente(String cpf) {
-		verificaCpf(cpf);
+	public String exibeCliente(String cpf) {
+		if (!clientes.containsKey(cpf)) {
+			throw new IllegalArgumentException("Erro na exibicao do cliente: cliente nao existe.");
+		}
 		return clientes.get(cpf).toString();
 	}
 	
@@ -97,9 +122,9 @@ public class ClienteController {
 	*   
 	* @return uma representação em String dos clientes
 	*/
-	public String exibirClientes() {
+	public String exibeClientes() {
 		List<String> listaClientes = new ArrayList<>();
-		adicionarClientesEmLista(listaClientes);
+		adicionaClientesEmLista(listaClientes);
 		
 		String retorno = "";
 		for (String c: listaClientes) {
@@ -111,21 +136,24 @@ public class ClienteController {
 	}
 	
 	/**
-	* Verifica se o cliente está cadastrado a partir do seu cpf, caso não esteja, lança a exceção mais adequada, caso esteja, edita os
-	* seus dados, com exceção do cpf, por ser único. 
+	* Verifica se o atributo e novoValor são válidos e se o cpf está cadastrado, em caso positivo, edita o atributo, caso contrário,
+	* lança a exceção mais adequada.
 	*
 	* @param cpf o cpf do cliente
-	* @param novoNome o novo nome do cliente
-	* @param novoEmail o novo email do cliente
-	* @param novaLocalizacao o novo local de trabalho do cliente
+	* @param atributo o atributo a ser editado
+	* @param novoValor o novo valor do atributo que vai ser editado
 	*/
-	public void editarCadastro(String cpf, String novoNome, String novoEmail, String novaLocalização) {
-		verificaCpf(cpf);
+	public void editaCliente(String cpf, String atributo, String novoValor) {
+		verificaDadosParaEdicao(cpf, atributo, novoValor);
 		
 		Cliente cliente = clientes.get(cpf);
-		cliente.setNome(novoNome);
-		cliente.setEmail(novoEmail);
-		cliente.setLocalizacao(novaLocalização);
+		if (atributo.equals("nome")) {
+			cliente.setNome(novoValor);
+		} else if (atributo.equals("email")){
+			cliente.setEmail(novoValor);
+		} else {
+			cliente.setLocalizacao(novoValor);
+		}
 	}
 	
 	/**
@@ -135,7 +163,9 @@ public class ClienteController {
 	* @param cpf o cpf do cliente
 	*/
 	public void removerCliente(String cpf) {
-		verificaCpf(cpf);
+		if (!clientes.containsKey(cpf)) {
+			throw new IllegalArgumentException("Erro na exibicao do cliente: cliente nao existe.");
+		}
 		clientes.remove(cpf);
 	}
 }

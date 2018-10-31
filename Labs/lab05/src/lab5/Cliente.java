@@ -25,23 +25,6 @@ public class Cliente {
 	private String localizacao;
 	
 	/**
-	* Método auxiliar que lança a exceção mais adequada se algum dos parâmetros passados para a construção do Cliente for inválido (nulo
-	* ou vazio).
-	* 
-	* @param cpf o cpf do cliente
-	* @param nome o nome do cliente
-	* @param email o email do cliente
-	* @param localizacao o local de trabalho do cliente
-	*/ 
-	private void verificaParametros(String cpf, String nome, String email, String localizacao) {
-		if (cpf == null || nome == null || email == null || localizacao == null) {
-			throw new NullPointerException("Objeto null passado como parâmetro.");
-		} else if (cpf.trim().equals("") || nome.trim().equals("") || email.trim().equals("") || localizacao.trim().equals("")) {
-			throw new IllegalArgumentException("String vazia passada como parâmetro");
-		}
-	}
-	
-	/**
 	* Constrói o cliente a partir do seu cpf, nome, email e localização.
 	*
 	* @param cpf o cpf do cliente
@@ -49,8 +32,7 @@ public class Cliente {
 	* @param email o email do cliente
 	* @param localizacao o local de trabalho do cliente
 	*/
-	public Cliente(String cpf, String nome, String email, String localizacao) {
-		verificaParametros(cpf, nome, email, localizacao);
+	public Cliente(String cpf, String nome, String email, String localizacao) {			
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;
@@ -107,14 +89,14 @@ public class Cliente {
 	}
 
 	/**
-	 * @param localizacao a nova localizacao (local de trabalho) do cliente
+	 * @param localizacao a nova localização (local de trabalho) do cliente
 	 */
 	public void setLocalizacao(String localizacao) {
 		this.localizacao = localizacao;
 	}
 	
 	/**
-	* Retorna a String que representa o cliente com todos os seus atributos (nome, cpf, email e local de trabalho).
+	* Retorna a String que representa o cliente no formato: nome - localizacao - email.
 	* 
 	* @return a representação em String do cliente.
 	*/
@@ -124,7 +106,7 @@ public class Cliente {
 	}
 
 	/**
-	* Retorna o valor int que representa a posição do objeto na memmória.
+	* Retorna o valor int que representa a posição do objeto na memória.
 	* 
 	* @return a representação numérica do objeto.  
 	*/
@@ -140,6 +122,7 @@ public class Cliente {
 	* Retorna o valor boolean que representa se dois clientes são iguais, ou seja, se possuem
 	* o mesmo cpf (identificação única do cliente).
 	* 
+	* @param obj o objeto que representa o outro cliente
 	* @return o valor boolean da igualdade (ou não) entre dois clientes.  
 	*/
 	@Override
