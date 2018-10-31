@@ -28,6 +28,25 @@ public class Fornecedor {
 	private Map<String, Produto> produtos;
 	
 	/**
+	* Método auxiliar que verifica os parâmetros passados para a construção do fornecedor e lança a exceção adequada quando necessário.
+	* 
+	* @param nome o nome do fornecedor
+	* @param email o email do fornecedor
+	* @param telefone o telefone do fornecedor
+	*/
+	private void verificaAtributosFornecedor(String nome, String email, String telefone) {
+		String msgErro = "Erro na construção do fornecedor: ";
+		
+		if (nome.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
+		} else if (email.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "email nao pode ser vazio ou nulo.");
+		} else if(telefone.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "telefone nao pode ser vazia ou nula.");
+		} 
+	}
+	
+	/**
 	* Constrói o fornecedor a partir do seu nome, email e telefone.
 	*
 	* @param nome o nome do fornecedor
@@ -35,6 +54,8 @@ public class Fornecedor {
 	* @param telefone o telefone do fornecedor
 	*/
 	public Fornecedor(String nome, String email, String telefone) {
+		verificaAtributosFornecedor(nome, email, telefone);
+		
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
