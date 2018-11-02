@@ -1,6 +1,8 @@
 package lab5;
 
+import java.util.ArrayList; 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,25 +28,14 @@ public class Fornecedor {
 	* Mapa de produtos do fornecedor.
 	*/
 	private Map<String, Produto> produtos;
-	
 	/**
-	* Método auxiliar que verifica os parâmetros passados para a construção do fornecedor e lança a exceção adequada quando necessário.
-	* 
-	* @param nome o nome do fornecedor
-	* @param email o email do fornecedor
-	* @param telefone o telefone do fornecedor
+	* Objeto Verificador de parâmetros.
 	*/
-	private void verificaAtributosFornecedor(String nome, String email, String telefone) {
-		String msgErro = "Erro na construção do fornecedor: ";
-		
-		if (nome.trim().equals("")) {
-			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
-		} else if (email.trim().equals("")) {
-			throw new IllegalArgumentException(msgErro + "email nao pode ser vazio ou nulo.");
-		} else if(telefone.trim().equals("")) {
-			throw new IllegalArgumentException(msgErro + "telefone nao pode ser vazia ou nula.");
-		} 
-	}
+	private VerificadorBase vb = new VerificadorBase();
+	/**
+	* Objeto adicionador de strings em listas.
+	*/
+	private Adicionador a = new Adicionador();
 	
 	/**
 	* Constrói o fornecedor a partir do seu nome, email e telefone.
@@ -54,8 +45,7 @@ public class Fornecedor {
 	* @param telefone o telefone do fornecedor
 	*/
 	public Fornecedor(String nome, String email, String telefone) {
-		verificaAtributosFornecedor(nome, email, telefone);
-		
+		vb.verificaParametrosFornecedor(nome, email, telefone);
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
@@ -116,6 +106,72 @@ public class Fornecedor {
 	 */
 	public void setProdutos(Map<String, Produto> produtos) {
 		this.produtos = produtos;
+	}
+	
+	/**
+	* Verifica se os parâmetros passados são válidos e, caso sejam, cadastra o produto para o fornecedor, caso contrário, lança uma 
+	* exceção. 
+	*
+	* @param nome o nome do produto
+	* @param descricao a descrição do produto
+	* @param preco o preço do produto
+	*/
+	public void adicionarProduto(String nome, String descricao, String preco) {
+		vb.verificaParametrosAdicionarProduto(nome, descricao, preco);
+		produtos.put((nome + descricao), new Produto(preco, nome, descricao));
+	}
+	
+	/**
+	* Exibe a representação textual de um determinado produto do fornecedor.
+	* 
+	* @param nome o nome do produto
+	* @param descricao a descrição do produto
+	* @return uma representação em String de um produto do fornecedor
+	*/
+	public String exibirProduto(String nome, String descricao) {
+		vb.verificaParametrosExibirProduto(nome, descricao, produtos);
+		return produtos.get(nome + descricao).toString(); 
+	}
+	
+	/**
+	* Exibe a representação textual de todos os produtos do fornecedor.
+	*   
+	* @return uma representação em String dos produtos do fornecedor
+	*/
+	public String exibirProdutos() {
+		List<String> listaProdutosFornecedor = new ArrayList<>();
+		a.adicionaProdutosFornecedorEmLista(this.nome, listaProdutosFornecedor, produtos);
+		
+		String retorno =  "";
+		for (String s: listaProdutosFornecedor) {
+			retorno += s;
+		}
+		retorno = retorno.substring(0, retorno.length() - 3);
+		return retorno;
+	}
+	
+	/**
+	* Verifica se os parâmetros passados são válidos e, caso sejam, edita o preço do produto, caso não sejam, lança uma exceção.
+	*
+	* @param nome o nome do produto
+	* @param descricao a descrição do produto
+	* @param novoPreco o novo preço do produto
+	*/
+	public void editarProduto(String nome, String descricao, String novoPreco) {
+		vb.verificaParametrosEditarProduto(nome, descricao, novoPreco, produtos);
+		produtos.get(nome + descricao).setPreco(novoPreco);
+		
+	}
+	
+	/**
+	* Verifica se os parâmetros passados são válidos e, caso sejam, remove o produto, caso contrário, lança uma exceção. 
+	* 
+	* @param nome o nome do produto
+	* @param descricao a descricao do produtos
+	*/
+	public void removerProduto(String nome, String descricao) {
+		vb.verificaParametrosRemoverProduto(nome, descricao, produtos);
+		produtos.remove(nome + descricao);
 	}
 
 	/**

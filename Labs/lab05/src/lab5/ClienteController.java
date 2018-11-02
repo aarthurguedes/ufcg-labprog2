@@ -1,12 +1,9 @@
 package lab5;
 
 import java.util.ArrayList;
-
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 /**
 * Representação de um controlador para os clientes, responsável por cadastrá-los, representá-los textualmente, editar os seus cadastros
 * e removê-los.
@@ -19,7 +16,15 @@ public class ClienteController {
 	* Mapa que representa os clientes, identificados unicamente por seu cpf.
 	*/
 	private Map<String, Cliente> clientes;
-
+	/**
+	* Objeto Verificador de parâmetros.
+	*/
+	private VerificadorControllers vc = new VerificadorControllers();
+	/**
+	* Objeto adicionador de strings em listas.
+	*/
+	private Adicionador a = new Adicionador();
+	
 	/**
 	* Constrói o controle a partir do mapa de clientes. 
 	*
@@ -29,27 +34,17 @@ public class ClienteController {
 	}
 	
 	/**
-	* Método auxiliar que verifica os parâmetros passados para a construção do cliente e lança a exceção adequada quando necessário.
-	* 
-	* @param cpf o cpf do cliente
-	* @param nome o nome do cliente
-	* @param email o email do cliente
-	* @param localizacao o local de trabalho do cliente
-	*/ 
-	private void verificaAtributosCliente(String cpf, String nome, String email, String localizacao) {
-		String msgErro = "Erro no cadastro do cliente: ";
-		
-		if (nome.trim().equals("")) {
-			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
-		} else if (email.trim().equals("")) {
-			throw new IllegalArgumentException(msgErro + "email nao pode ser vazio ou nulo.");
-		} else if(localizacao.trim().equals("")) {
-			throw new IllegalArgumentException(msgErro + "localizacao nao pode ser vazia ou nula.");
-		} else if (clientes.containsKey(cpf)) { 
-			throw new IllegalArgumentException(msgErro + "cliente ja existe.");
-		} else if (cpf.length() > 11 || cpf.length() < 11) {
-			throw new IllegalArgumentException(msgErro + "cpf invalido.");
-		}
+	 * @return os clientes
+	 */
+	public Map<String, Cliente> getClientes() {
+		return clientes;
+	}
+	
+	/**
+	 * @param clientes o novo mapa de clientes
+	 */
+	public void setClientes(Map<String, Cliente> clientes) {
+		this.clientes = clientes;
 	}
 	
 	/**
@@ -62,10 +57,8 @@ public class ClienteController {
 	* @return o cpf do cliente
 	*/
 	public String adicionaCliente(String cpf, String nome, String email, String localizacao) {
-		verificaAtributosCliente(cpf, nome, email, localizacao);
-		
-		Cliente cliente = new Cliente(cpf, nome, email, localizacao);
-		clientes.put(cpf, cliente);
+		vc.verificaParametrosAdicionaCliente(cpf, nome, email, localizacao, clientes);
+		clientes.put(cpf, new Cliente(cpf, nome, email, localizacao));
 		return cpf;
 	}
 	
@@ -80,21 +73,7 @@ public class ClienteController {
 		if (!clientes.containsKey(cpf)) {
 			throw new IllegalArgumentException("Erro na exibicao do cliente: cliente nao existe.");
 		}
-		return clientes.get(cpf).toString();
-	}
-	
-	/**
-	* Método auxiliar que adiciona as representações (em String) dos clientes em uma lista e os ordena alfabeticamente.
-	* 
-	* @param listaClientes a lista que armazenará os clientes
-	*/
-	private void adicionaClientesEmLista(List<String> listaClientes) {
-		for (Cliente c: clientes.values()) {
-			if (c != null) {
-				listaClientes.add(c.toString() + " | ");
-			}
-		} 
-		Collections.sort(listaClientes);
+		return clientes.get(cpf).toString(); 
 	}
 	
 	/**
@@ -104,7 +83,7 @@ public class ClienteController {
 	*/
 	public String exibeClientes() {
 		List<String> listaClientes = new ArrayList<>();
-		adicionaClientesEmLista(listaClientes);
+		a.adicionaClientesEmLista(listaClientes, clientes);
 		
 		String retorno = "";
 		for (String c: listaClientes) {
@@ -116,26 +95,6 @@ public class ClienteController {
 	}
 	
 	/**
-	* Método auxiliar que verifica os parâmetros passados para a edição do cliente e lança a exceção adequada quando necessário.
-	* 
-	* @param atributo o atributo o qual se quer editar
-	* @param novoValor o novo valor para o atributo
-	*/ 
-	private void verificaDadosParaEdicao(String cpf, String atributo, String novoValor) {
-		String msg = "Erro na edicao do cliente:";
-		
-		if (atributo.trim().equals("")) {
-			throw new IllegalArgumentException(msg + " atributo nao pode ser vazio ou nulo.");
-		} else if (novoValor.trim().equals("")) {
-			throw new IllegalArgumentException(msg + " novo valor nao pode ser vazio ou nulo.");
-		} else if (!clientes.containsKey(cpf)) {
-			throw new IllegalArgumentException(msg + " cliente nao existe."); 
-		} else if ((!atributo.equals("nome")) && (!atributo.equals("email")) && (!atributo.equals("localizacao"))) {
-			throw new IllegalArgumentException(msg + " atributo nao existe.");
-		}
-	}
-	
-	/**
 	* Verifica se o atributo e novoValor são válidos e se o cpf está cadastrado, em caso positivo, edita o atributo, caso contrário,
 	* lança a exceção mais adequada.
 	*
@@ -144,15 +103,14 @@ public class ClienteController {
 	* @param novoValor o novo valor do atributo que vai ser editado
 	*/
 	public void editaCliente(String cpf, String atributo, String novoValor) {
-		verificaDadosParaEdicao(cpf, atributo, novoValor);
+		vc.verificaParametrosEditaCliente(cpf, atributo, novoValor, clientes); 
 		
-		Cliente cliente = clientes.get(cpf);
 		if (atributo.equals("nome")) {
-			cliente.setNome(novoValor);
+			clientes.get(cpf).setNome(novoValor);
 		} else if (atributo.equals("email")){
-			cliente.setEmail(novoValor);
+			clientes.get(cpf).setEmail(novoValor);
 		} else {
-			cliente.setLocalizacao(novoValor);
+			clientes.get(cpf).setLocalizacao(novoValor);
 		}
 	}
 	

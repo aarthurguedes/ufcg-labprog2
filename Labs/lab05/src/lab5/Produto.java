@@ -19,27 +19,10 @@ public class Produto {
 	* Descrição do produto.
 	*/
 	private String descricao;
-	
 	/**
-	* Método auxiliar que verifica os parâmetros passados para a construção do produto e lança a exceção adequada quando necessário.
-	* 
-	* @param nome o nome do produto
-	* @param descricao a descrição do produto
-	* @param preco o preço do produto
-	*/ 
-	private void verificaAtributosProduto(String nome, String descricao, String preco) {
-		String msgErro = "Erro no cadastro de produto: ";
-		
-		if (nome.trim().equals("")) {
-			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
-		} else if (descricao.trim().equals("")) {
-			throw new IllegalArgumentException(msgErro + "descricao nao pode ser vazia ou nula.");
-		} else if (preco.trim().equals("")) {
-			throw new IllegalArgumentException(msgErro + "preco nao pode ser vazio ou nulo.");
-		} else if (Float.parseFloat(preco) < 0) {
-			throw new IllegalArgumentException(msgErro + "preco invalido.");
-		}
-	}
+	* Objeto Verificador de parâmetros.
+	*/
+	private VerificadorBase vb = new VerificadorBase();
 	
 	/**
 	* Constrói o produto a partir do seu preço, nome e descrição.
@@ -49,8 +32,7 @@ public class Produto {
 	* @param descricao a descrição do produto
 	*/
 	public Produto(String preco, String nome, String descricao) {
-		verificaAtributosProduto(nome, descricao, preco);
-		
+		vb.verificaParametrosProduto(nome, descricao, preco);
 		this.preco = preco;
 		this.nome = nome;
 		this.descricao = descricao;
@@ -97,7 +79,7 @@ public class Produto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	
 	/**
 	* Retorna a String que representa o produto com todos os seus atributos (nome, descrição e preço).
 	* 

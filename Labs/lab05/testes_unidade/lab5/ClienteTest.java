@@ -25,6 +25,8 @@ class ClienteTest {
 	@Test
 	public void testCpfInvalido() {
 		assertThrows(IllegalArgumentException.class, () -> new Cliente("", "João Neto", "joaoneto@ccc.ufcg.edu.br", "SPLAB"));
+		assertThrows(IllegalArgumentException.class, () -> new Cliente("0000000000", "João Neto", "joaoneto@ccc.ufcg.edu.br", "SPLAB"));
+		assertThrows(IllegalArgumentException.class, () -> new Cliente("000000000000", "João Neto", "joaoneto@ccc.ufcg.edu.br", "SPLAB"));
 	}
 	
 	@Test

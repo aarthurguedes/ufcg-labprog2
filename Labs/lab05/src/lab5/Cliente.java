@@ -23,30 +23,10 @@ public class Cliente {
 	* Local de trabalho do cliente.
 	*/
 	private String localizacao;
-	
 	/**
-	* Método auxiliar que verifica os parâmetros passados para a construção do cliente e lança a exceção adequada quando necessário.
-	* 
-	* @param cpf o cpf do cliente
-	* @param nome o nome do cliente
-	* @param email o email do cliente
-	* @param localizacao o local de trabalho do cliente
-	*/ 
-	private void verificaAtributosCliente(String cpf, String nome, String email, String localizacao) {
-		String msgErro = "Erro na construção do cliente: ";
-		
-		if (nome.trim().equals("")) {
-			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
-		} else if (email.trim().equals("")) {
-			throw new IllegalArgumentException(msgErro + "email nao pode ser vazio ou nulo.");
-		} else if(localizacao.trim().equals("")) {
-			throw new IllegalArgumentException(msgErro + "localizacao nao pode ser vazia ou nula.");
-		} else if (cpf.trim().equals("")) {
-			throw new IllegalArgumentException(msgErro + "cpf nao pode ser vazio ou nulo.");
-		} else if (cpf.length() > 11 || cpf.length() < 11) {
-			throw new IllegalArgumentException(msgErro + "cpf invalido.");
-		}
-	}
+	* Objeto Verificador de parâmetros.
+	*/
+	private VerificadorBase vb = new VerificadorBase();
 	
 	/**
 	* Constrói o cliente a partir do seu cpf, nome, email e localização.
@@ -57,8 +37,7 @@ public class Cliente {
 	* @param localizacao o local de trabalho do cliente
 	*/
 	public Cliente(String cpf, String nome, String email, String localizacao) {			
-		verificaAtributosCliente(cpf, nome, email, localizacao);
-		
+		vb.verificaParametrosCliente(cpf, nome, email, localizacao);
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;

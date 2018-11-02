@@ -142,9 +142,10 @@ public class Facade {
 	* Verifica se os parâmetros passados são válidos e, caso sejam, cadastra o produto para o fornecedor, caso contrário, lança uma 
 	* exceção. 
 	*
-	* @param nome o nome do fornecedor
-	* @param email o email do fornecedor
-	* @param telefone o telefone do fornecedor
+	* @param fornecedor o nome do fornecedor
+	* @param nome o nome do produto
+	* @param descricao a descrição do produto
+	* @param preco o preço do produto
 	*/
 	public void adicionaProduto(String fornecedor, String nome, String descricao, String preco) {
 		fc.adicionaProduto(fornecedor, nome, descricao, preco);
@@ -186,6 +187,7 @@ public class Facade {
 	*
 	* @param nome o nome do produto
 	* @param descricao a descrição do produto
+	* @param fornecedor o nome do fornecedor
 	* @param novoPreco o novo preço do produto
 	*/
 	public void editaProduto(String nome, String descricao, String fornecedor, String novoPreco) {
