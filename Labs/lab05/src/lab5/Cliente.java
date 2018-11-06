@@ -1,7 +1,7 @@
 package lab5;
 
 /**
-* Representação de um cliente, que possui cpf (identificação única), nome, email e local de trabalho (localização).
+* RepresentaÃ§Ã£o de um cliente, que possui cpf (identificaÃ§Ã£o Ãºnica), nome, email e local de trabalho (localizaÃ§Ã£o).
 *
 * @author Arthur Guedes
 */
@@ -24,12 +24,12 @@ public class Cliente {
 	*/
 	private String localizacao;
 	/**
-	* Objeto Verificador de parâmetros.
+	* Objeto Verificador de parÃ¢metros.
 	*/
 	private VerificadorBase vb = new VerificadorBase();
 	
 	/**
-	* Constrói o cliente a partir do seu cpf, nome, email e localização.
+	* ConstrÃ³i o cliente a partir do seu cpf, nome, email e localizaÃ§Ã£o.
 	*
 	* @param cpf o cpf do cliente
 	* @param nome o nome do cliente
@@ -92,9 +92,9 @@ public class Cliente {
 	public String getLocalizacao() {
 		return localizacao;
 	}
-
+	
 	/**
-	 * @param localizacao a nova localização (local de trabalho) do cliente
+	 * @param localizacao a nova localizaÃ§Ã£o (local de trabalho) do cliente
 	 */
 	public void setLocalizacao(String localizacao) {
 		this.localizacao = localizacao;
@@ -103,7 +103,7 @@ public class Cliente {
 	/**
 	* Retorna a String que representa o cliente no formato: nome - localizacao - email.
 	* 
-	* @return a representação em String do cliente.
+	* @return a representaÃ§Ã£o em String do cliente.
 	*/
 	@Override
 	public String toString() {
@@ -111,9 +111,9 @@ public class Cliente {
 	}
 
 	/**
-	* Retorna o valor int que representa a posição do objeto na memória.
+	* Retorna o valor int que representa a posiÃ§Ã£o do objeto na memÃ³ria.
 	* 
-	* @return a representação numérica do objeto.  
+	* @return a representaÃ§Ã£o numÃ©rica do objeto.  
 	*/
 	@Override
 	public int hashCode() {
@@ -124,11 +124,11 @@ public class Cliente {
 	}
 	
 	/**
-	* Retorna o valor boolean que representa se dois clientes são iguais, ou seja, se possuem
-	* o mesmo cpf (identificação única do cliente).
+	* Retorna o valor boolean que representa se dois clientes sÃ£o iguais, ou seja, se possuem
+	* o mesmo cpf (identificaÃ§Ã£o Ãºnica do cliente).
 	* 
 	* @param obj o objeto que representa o outro cliente
-	* @return o valor boolean da igualdade (ou não) entre dois clientes.  
+	* @return o valor boolean da igualdade (ou nÃ£o) entre dois clientes.  
 	*/
 	@Override
 	public boolean equals(Object obj) {

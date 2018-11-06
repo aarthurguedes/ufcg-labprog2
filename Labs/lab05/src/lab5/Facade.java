@@ -3,7 +3,7 @@ package lab5;
 import easyaccept.EasyAccept;
 
 /**
-* RepresentaÁ„o da fachada do sistema, que inicializa o ClienteController e o FornecedorController.
+* Representa√ß√£o da fachada do sistema, que inicializa o ClienteController e o FornecedorController.
 *
 * @author Arthur Guedes
 */
@@ -19,7 +19,7 @@ public class Facade {
 	private FornecedorController fc;
 	
 	/**
-	* ConstrÛi a fachada do sistema, inicializando os controladores.
+	* Constr√≥i a fachada do sistema, inicializando os controladores.
 	*
 	*/
 	public Facade() {
@@ -28,8 +28,8 @@ public class Facade {
 	}
 	
 	/**
-	* Verifica se os par‚metros passados para o cadastramento do cliente s„o v·lidos e, caso sejam, cadastra o cliente, caso contr·rio, 
-	* lanÁa uma exceÁ„o.
+	* Verifica se os par√¢metros passados para o cadastramento do cliente s√£o v√°lidos e, caso sejam, cadastra o cliente, caso contr√°rio, 
+	* lan√ßa uma exce√ß√£o.
 	*
 	* @param cpf o cpf do cliente
 	* @param nome o nome do cliente
@@ -42,28 +42,28 @@ public class Facade {
 	}
 	
 	/**
-	* Verifica se o cpf do cliente passado como par‚metro est· cadastrado e, caso n„o esteja, lanÁa a exceÁ„o mais adequada, 
-	* caso esteja, retorna a representaÁ„o em String do cliente. 
+	* Verifica se o cpf do cliente passado como par√¢metro est√° cadastrado e, caso n√£o esteja, lan√ßa a exce√ß√£o mais adequada, 
+	* caso esteja, retorna a representa√ß√£o em String do cliente. 
 	* 
 	* @param cpf o cpf do cliente
-	* @return uma representaÁ„o em String do cliente, se o mesmo estiver cadastrado.
+	* @return uma representa√ß√£o em String do cliente, se o mesmo estiver cadastrado.
 	*/
 	public String exibeCliente(String cpf) {
 		return cc.exibeCliente(cpf);
 	}
 	
 	/**
-	* Exibe a representaÁ„o textual de todos os clientes cadastrados no sistema.
+	* Exibe a representa√ß√£o textual de todos os clientes cadastrados no sistema.
 	*   
-	* @return uma representaÁ„o em String dos clientes cadastrados no sistema
+	* @return uma representa√ß√£o em String dos clientes cadastrados no sistema
 	*/
 	public String exibeClientes() {
 		return cc.exibeClientes();
 	}
 	
 	/**
-	* Verifica se atributo e novoValor s„o v·lidos e se o cpf est· cadastrado, em caso positivo, edita o atributo, caso contr·rio,
-	* lanÁa a exceÁ„o mais adequada.
+	* Verifica se atributo e novoValor s√£o v√°lidos e se o cpf est√° cadastrado, em caso positivo, edita o atributo, caso contr√°rio,
+	* lan√ßa a exce√ß√£o mais adequada.
 	*
 	* @param cpf o cpf do cliente
 	* @param atributo o atributo a ser editado
@@ -74,7 +74,7 @@ public class Facade {
 	}
 	
 	/**
-	* Verifica se o cpf do cliente passado como par‚metro est· cadastrado e, caso n„o esteja, lanÁa a exceÁ„o mais adequada, 
+	* Verifica se o cpf do cliente passado como par√¢metro est√° cadastrado e, caso n√£o esteja, lan√ßa a exce√ß√£o mais adequada, 
 	* caso esteja, remove o cadastro do cliente. 
 	* 
 	* @param cpf o cpf do cliente
@@ -84,8 +84,8 @@ public class Facade {
 	}
 	
 	/**
-	* Verifica se os par‚metros passados para o cadastramento do fornecedor s„o v·lidos e, caso sejam, cadastra o fornecedor, caso 
-	* contr·rio, lanÁa uma exceÁ„o. 
+	* Verifica se os par√¢metros passados para o cadastramento do fornecedor s√£o v√°lidos e, caso sejam, cadastra o fornecedor, caso 
+	* contr√°rio, lan√ßa uma exce√ß√£o. 
 	*
 	* @param nome o nome do fornecedor
 	* @param email o email do fornecedor
@@ -97,28 +97,28 @@ public class Facade {
 	}
 	
 	/**
-	* Verifica se o nome do fornecedor passado como par‚metro est· cadastrado e, caso n„o esteja, lanÁa a exceÁ„o mais adequada, 
-	* caso esteja, retorna a representaÁ„o em String do fornecedor. 
+	* Verifica se o nome do fornecedor passado como par√¢metro est√° cadastrado e, caso n√£o esteja, lan√ßa a exce√ß√£o mais adequada, 
+	* caso esteja, retorna a representa√ß√£o em String do fornecedor. 
 	* 
 	* @param nome o nome do fornecedor
-	* @return uma representaÁ„o em String do fornecedor, se o mesmo estiver cadastrado.
+	* @return uma representa√ß√£o em String do fornecedor, se o mesmo estiver cadastrado.
 	*/
 	public String exibeFornecedor(String nome) {
 		return fc.exibeFornecedor(nome);
 	}
 	
 	/**
-	* Exibe a representaÁ„o textual de todos os fornecedores cadastrados no sistema.
+	* Exibe a representa√ß√£o textual de todos os fornecedores cadastrados no sistema.
 	*   
-	* @return uma representaÁ„o em String dos fornecedores cadastrados
+	* @return uma representa√ß√£o em String dos fornecedores cadastrados
 	*/
 	public String exibeFornecedores() {
 		return fc.exibeFornecedores();
 	}
 	
 	/**
-	* Verifica se os par‚metros passados do fornecedor s„o v·lidos e, caso sejam, edita os dados do fornecedor, caso n„o sejam, lanÁa 
-	* uma exceÁ„o.
+	* Verifica se os par√¢metros passados do fornecedor s√£o v√°lidos e, caso sejam, edita os dados do fornecedor, caso n√£o sejam, lan√ßa 
+	* uma exce√ß√£o.
 	*
 	* @param nome o nome do fornecedor
 	* @param atributo o atributo o qual se deseja editar
@@ -129,7 +129,7 @@ public class Facade {
 	}
 	
 	/**
-	* Verifica se o nome do fornecedor passado como par‚metro È v·lido e, caso n„o seja, lanÁa uma exceÁ„o, caso seja, remove o 
+	* Verifica se o nome do fornecedor passado como par√¢metro √© v√°lido e, caso n√£o seja, lan√ßa uma exce√ß√£o, caso seja, remove o 
 	* cadastro do fornecedor.  
 	* 
 	* @param nome o nome do fornecedor
@@ -139,63 +139,63 @@ public class Facade {
 	}
 	
 	/**
-	* Verifica se os par‚metros passados s„o v·lidos e, caso sejam, cadastra o produto para o fornecedor, caso contr·rio, lanÁa uma 
-	* exceÁ„o. 
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, cadastra o produto para o fornecedor, caso contr√°rio, lan√ßa uma 
+	* exce√ß√£o. 
 	*
 	* @param fornecedor o nome do fornecedor
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
-	* @param preco o preÁo do produto
+	* @param descricao a descri√ß√£o do produto
+	* @param preco o pre√ßo do produto
 	*/
 	public void adicionaProduto(String fornecedor, String nome, String descricao, String preco) {
 		fc.adicionaProduto(fornecedor, nome, descricao, preco);
 	}
 	
 	/**
-	* Verifica se os par‚metros passados s„o v·lidos e, caso sejam, exibe o produto desejado, caso contr·rio, lanÁa uma exceÁ„o.
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, exibe o produto desejado, caso contr√°rio, lan√ßa uma exce√ß√£o.
 	* 
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
+	* @param descricao a descri√ß√£o do produto
 	* @param fornecedor o fornecedor do produto
-	* @return uma representaÁ„o em String do produto
+	* @return uma representa√ß√£o em String do produto
 	*/
 	public String exibeProduto(String nome, String descricao, String fornecedor) {
 		return fc.exibeProduto(nome, descricao, fornecedor);
 	}
 	
 	/**
-	* Exibe a representaÁ„o textual de todos os produtos para um determinado fornecedor.
+	* Exibe a representa√ß√£o textual de todos os produtos para um determinado fornecedor.
 	*   
 	* @param fornecedor o nome do fornecedor
-	* @return uma representaÁ„o em String dos produtos do fornecedor
+	* @return uma representa√ß√£o em String dos produtos do fornecedor
 	*/
 	public String exibeProdutosFornecedor(String fornecedor) {
 		return fc.exibeProdutosFornecedor(fornecedor);
 	}
 	
 	/**
-	* Exibe a representaÁ„o textual de todos os produtos de todos os fornecedores (de maneira ordenada).
+	* Exibe a representa√ß√£o textual de todos os produtos de todos os fornecedores (de maneira ordenada).
 	*   
-	* @return uma representaÁ„o em String dos produtos dos fornecedores
+	* @return uma representa√ß√£o em String dos produtos dos fornecedores
 	*/
 	public String exibeProdutos() {
 		return fc.exibeProdutos();
 	}
 	
 	/**
-	* Verifica se os par‚metros passados s„o v·lidos e, caso sejam, edita o preÁo do produto, caso n„o sejam, lanÁa uma exceÁ„o.
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, edita o pre√ßo do produto, caso n√£o sejam, lan√ßa uma exce√ß√£o.
 	*
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
+	* @param descricao a descri√ß√£o do produto
 	* @param fornecedor o nome do fornecedor
-	* @param novoPreco o novo preÁo do produto
+	* @param novoPreco o novo pre√ßo do produto
 	*/
 	public void editaProduto(String nome, String descricao, String fornecedor, String novoPreco) {
 		fc.editaProduto(nome, descricao, fornecedor, novoPreco);
 	}
 	
 	/**
-	* Verifica se os par‚metros passados s„o v·lidos e, caso sejam, remove o produto, caso contr·rio, lanÁa uma exceÁ„o. 
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, remove o produto, caso contr√°rio, lan√ßa uma exce√ß√£o. 
 	* 
 	* @param nome o nome do produto
 	* @param descricao a descricao do produto
@@ -205,9 +205,36 @@ public class Facade {
 		fc.removeProduto(nome, descricao, fornecedor);
 	}
 	
+	/**
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, cadastra o combo para o fornecedor, caso contr√°rio, lan√ßa uma 
+	* exce√ß√£o. 
+	*
+	* @param fornecedor o nome do fornecedor
+	* @param nome o nome do combo
+	* @param descricao a descri√ß√£o do combo
+	* @param fator o fator de desconto
+	* @param produtos os produtos que v√£o compor o combo
+	*/
+	public void adicionaCombo(String fornecedor, String nome, String descricao, String fator, String produtos) {
+		fc.adicionaCombo(fornecedor, nome, descricao, fator, produtos);
+	}
+	
+	/**
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, edita o fator de desconto do combo, caso n√£o sejam, 
+	* lan√ßa uma exce√ß√£o.
+	*
+	* @param nome o nome do combo
+	* @param descricao a descri√ß√£o do combo
+	* @param fornecedor o nome do fornecedor
+	* @param novoFator o novo fator de desconto do combo
+	*/
+	public void editaCombo(String nome, String descricao, String fornecedor, String novoFator) {
+		fc.editaCombo(nome, descricao, fornecedor, novoFator);
+	}
+	
 	public static void main(String[] args) {
 		args = new String[] {"lab5.Facade", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt", 
-				"testes_aceitacao/use_case_3.txt"};
+				"testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt"};
 		EasyAccept.main(args);
 	}
 }

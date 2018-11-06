@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* RepresentaÁ„o de um controlador para os fornecedores, respons·vel por cadastr·-los, represent·-los textualmente, editar os seus 
-* cadastros e removÍ-los.
+* Representa√ß√£o de um controlador para os fornecedores, respons√°vel por cadastr√°-los, represent√°-los textualmente, editar os seus 
+* cadastros e remov√™-los.
 *
 * @author Arthur Guedes
 */
@@ -18,7 +18,7 @@ public class FornecedorController {
 	*/
 	private Map<String, Fornecedor> fornecedores;
 	/**
-	* Objeto Verificador de par‚metros.
+	* Objeto Verificador de par√¢metros.
 	*/
 	private VerificadorControllers vc = new VerificadorControllers();
 	/**
@@ -27,7 +27,7 @@ public class FornecedorController {
 	private Adicionador a = new Adicionador();
 	
 	/**
-	* ConstrÛi o controle a partir do mapa de fornecedores. 
+	* Constr√≥i o controle a partir do mapa de fornecedores. 
 	*
 	*/
 	public FornecedorController() {
@@ -49,7 +49,7 @@ public class FornecedorController {
 	}
 
 	/**
-	* Verifica se os par‚metros passados s„o v·lidos e, caso sejam, cadastra o fornecedor, caso contr·rio, lanÁa uma exceÁ„o. 
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, cadastra o fornecedor, caso contr√°rio, lan√ßa uma exce√ß√£o. 
 	*
 	* @param nome o nome do fornecedor
 	* @param email o email do fornecedor
@@ -63,11 +63,11 @@ public class FornecedorController {
 	}
 	
 	/**
-	* Verifica se o nome do fornecedor passado como par‚metro est· cadastrado e, caso n„o esteja, lanÁa a exceÁ„o mais adequada, 
-	* caso esteja, retorna a representaÁ„o em String do fornecedor. 
+	* Verifica se o nome do fornecedor passado como par√¢metro est√° cadastrado e, caso n√£o esteja, lan√ßa a exce√ß√£o mais adequada, 
+	* caso esteja, retorna a representa√ß√£o em String do fornecedor. 
 	* 
 	* @param nome o nome do fornecedor
-	* @return uma representaÁ„o em String do fornecedor, se o mesmo estiver cadastrado.
+	* @return uma representa√ß√£o em String do fornecedor, se o mesmo estiver cadastrado.
 	*/
 	public String exibeFornecedor(String nome) {
 		if (!fornecedores.containsKey(nome)) {
@@ -77,9 +77,9 @@ public class FornecedorController {
 	}
 	
 	/**
-	* Exibe a representaÁ„o textual de todos os fornecedores cadastrados no sistema.
+	* Exibe a representa√ß√£o textual de todos os fornecedores cadastrados no sistema.
 	*   
-	* @return uma representaÁ„o em String dos fornecedores
+	* @return uma representa√ß√£o em String dos fornecedores
 	*/
 	public String exibeFornecedores() {
 		List<String> listaFornecedores = new ArrayList<>();
@@ -94,10 +94,8 @@ public class FornecedorController {
 		return retorno;
 	}
 	
-	
-	
 	/**
-	* Verifica se os par‚metros passados s„o v·lidos e, caso sejam, edita os dados do fornecedor, caso n„o sejam, lanÁa uma exceÁ„o.
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, edita os dados do fornecedor, caso n√£o sejam, lan√ßa uma exce√ß√£o.
 	*
 	* @param nome o nome do fornecedor
 	* @param atributo o atributo o qual se deseja editar
@@ -114,7 +112,7 @@ public class FornecedorController {
 	}
 	
 	/**
-	* Verifica se o nome do fornecedor passado como par‚metro È v·lido e, caso n„o seja, lanÁa uma exceÁ„o, caso seja, remove o cadastro
+	* Verifica se o nome do fornecedor passado como par√¢metro √© v√°lido e, caso n√£o seja, lan√ßa uma exce√ß√£o, caso seja, remove o cadastro
 	* do fornecedor.  
 	* 
 	* @param nome o nome do fornecedor
@@ -129,13 +127,13 @@ public class FornecedorController {
 	}
 	
 	/**
-	* Verifica se os par‚metros passados s„o v·lidos e, caso sejam, cadastra o produto para o fornecedor, caso contr·rio, lanÁa uma 
-	* exceÁ„o. 
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, cadastra o produto para o fornecedor, caso contr√°rio, lan√ßa uma 
+	* exce√ß√£o. 
 	*
 	* @param fornecedor o nome do fornecedor
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
-	* @param preco o preÁo do produto
+	* @param descricao a descri√ß√£o do produto
+	* @param preco o pre√ßo do produto
 	*/
 	public void adicionaProduto(String fornecedor, String nome, String descricao, String preco) {
 		vc.verificaParametrosAdicionaProduto(fornecedor, nome, descricao, preco, fornecedores);
@@ -143,12 +141,12 @@ public class FornecedorController {
 	}
 	
 	/**
-	* Verifica se os par‚metros passados s„o v·lidos e, caso seja, exibe o produto desejado, caso contr·rio, lanÁa uma exceÁ„o.
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso seja, exibe o produto desejado, caso contr√°rio, lan√ßa uma exce√ß√£o.
 	* 
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
+	* @param descricao a descri√ß√£o do produto
 	* @param fornecedor o fornecedor do produto
-	* @return uma representaÁ„o em String do produto
+	* @return uma representa√ß√£o em String do produto
 	*/
 	public String exibeProduto(String nome, String descricao, String fornecedor) {
 		vc.verificaParametrosExibeProduto(nome, descricao, fornecedor, fornecedores);
@@ -156,10 +154,10 @@ public class FornecedorController {
 	}
 	
 	/**
-	* Exibe a representaÁ„o textual de todos os produtos dado um fornecedor.
+	* Exibe a representa√ß√£o textual de todos os produtos dado um fornecedor.
 	*   
 	* @param fornecedor o nome do fornecedor
-	* @return uma representaÁ„o em String dos produtos do fornecedor
+	* @return uma representa√ß√£o em String dos produtos do fornecedor
 	*/
 	public String exibeProdutosFornecedor(String fornecedor) {
 		if (fornecedor.trim().equals("")) {
@@ -167,15 +165,16 @@ public class FornecedorController {
 		}
 		return fornecedores.get(fornecedor).exibirProdutos();
 	}
-	
+
 	/**
-	* Exibe a representaÁ„o textual de todos os produtos de todos os fornecedores.
+	* Exibe a representa√ß√£o textual de todos os produtos de todos os fornecedores.
 	*   
-	* @return uma representaÁ„o em String dos produtos dos fornecedores
+	* @return uma representa√ß√£o em String dos produtos dos fornecedores
 	*/
 	public String exibeProdutos() {
 		List<String> listaProdutos = new ArrayList<>();
 		a.adicionaProdutosEmLista(listaProdutos, fornecedores);
+		a.adicionaCombosEmLista(listaProdutos, fornecedores);
 		
 		String retorno = "";
 		for (String p: listaProdutos) {
@@ -187,12 +186,12 @@ public class FornecedorController {
 	}
 	
 	/**
-	* Verifica se os par‚metros passados s„o v·lidos e, caso sejam, edita o preÁo do produto, caso n„o sejam, lanÁa uma exceÁ„o.
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, edita o pre√ßo do produto, caso n√£o sejam, lan√ßa uma exce√ß√£o.
 	*
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
+	* @param descricao a descri√ß√£o do produto
 	* @param fornecedor o nome do fornecedor
-	* @param novoPreco o novo preÁo do produto
+	* @param novoPreco o novo pre√ßo do produto
 	*/
 	public void editaProduto(String nome, String descricao, String fornecedor, String novoPreco) {
 		vc.verificaParametrosEditaProduto(nome, descricao, fornecedor, novoPreco, fornecedores);
@@ -200,7 +199,7 @@ public class FornecedorController {
 	}
 	
 	/**
-	* Verifica se os par‚metros passados s„o v·lidos e, caso sejam, remove o produto, caso contr·rio, lanÁa uma exceÁ„o. 
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, remove o produto, caso contr√°rio, lan√ßa uma exce√ß√£o. 
 	* 
 	* @param nome o nome do produto
 	* @param descricao a descricao do produto
@@ -209,5 +208,65 @@ public class FornecedorController {
 	public void removeProduto(String nome, String descricao, String fornecedor) {
 		vc.verificaParametrosRemoveProduto(nome, descricao, fornecedor, fornecedores);
 		fornecedores.get(fornecedor).removerProduto(nome, descricao);
+	}
+	
+	/**
+	* M√©todo auxiliar que forma as chaves dos produtos passados como par√¢metros.
+	* 
+	* @param numProduto o numero do produto que se quer a chave
+	* @param produtos a String que representa os produtos
+	* @return a String que representa a key do produto
+	*/ 
+	private String pegaKeyProduto(int numProduto, String produtos) {
+		String produto[] = produtos.split(", ");
+		
+		if (numProduto == 1) {
+			String p[] = produto[0].split(" - ");
+			String key = p[0] + p[1];
+			return key;
+		} else {
+			String p[] = produto[1].split(" - ");
+			String key = p[0] + p[1];
+			return key;
+		}
+	}
+	
+	/**
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, cadastra o combo para o fornecedor, caso contr√°rio, lan√ßa uma 
+	* exce√ß√£o. 
+	*
+	* @param fornecedor o nome do fornecedor
+	* @param nome o nome do combo
+	* @param descricao a descri√ß√£o do combo
+	* @param fator o fator de desconto
+	* @param produtos os produtos que v√£o compor o combo
+	*/
+	public void adicionaCombo(String fornecedor, String nome, String descricao, String fator, String produtos) {
+		vc.verificaParametrosAdicionaCombo(fornecedor, nome, descricao, fator, produtos, fornecedores);
+		String keyProduto1 = pegaKeyProduto(1, produtos);
+		String keyProduto2 = pegaKeyProduto(2, produtos);
+		
+		if (fornecedores.get(fornecedor).getCombos().containsKey(keyProduto1) || fornecedores.get(fornecedor).getCombos().
+					containsKey(keyProduto2)) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: um combo nÔøΩo pode possuir combos na lista de produtos.");
+		} else if (!fornecedores.get(fornecedor).getProdutos().containsKey(keyProduto1) || !fornecedores.get(fornecedor).
+				getProdutos().containsKey(keyProduto2)) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: produto nao existe.");
+		}
+		fornecedores.get(fornecedor).adicionarCombo(nome, descricao, fator, produtos); 
+	}
+	
+	/**
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, edita o fator de desconto do combo, caso n√£o sejam, 
+	* lan√ßa uma exce√ß√£o.
+	*
+	* @param nome o nome do combo
+	* @param descricao a descri√ß√£o do combo
+	* @param fornecedor o nome do fornecedor
+	* @param novoFator o novo fator de desconto do combo
+	*/
+	public void editaCombo(String nome, String descricao, String fornecedor, String novoFator) {
+		vc.verificaParametrosEditaCombo(nome, descricao, fornecedor, novoFator, fornecedores);
+		fornecedores.get(fornecedor).editarCombo(nome, descricao, novoFator);
 	}
 }

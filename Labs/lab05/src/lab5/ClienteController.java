@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
-* RepresentaÁ„o de um controlador para os clientes, respons·vel por cadastr·-los, represent·-los textualmente, editar os seus cadastros
-* e removÍ-los.
+* Representa√ß√£o de um controlador para os clientes, respons√°vel por cadastr√°-los, represent√°-los textualmente, editar os seus cadastros
+* e remov√™-los.
 *
 * @author Arthur Guedes
 */
@@ -17,7 +18,7 @@ public class ClienteController {
 	*/
 	private Map<String, Cliente> clientes;
 	/**
-	* Objeto Verificador de par‚metros.
+	* Objeto Verificador de par√£metros.
 	*/
 	private VerificadorControllers vc = new VerificadorControllers();
 	/**
@@ -26,7 +27,7 @@ public class ClienteController {
 	private Adicionador a = new Adicionador();
 	
 	/**
-	* ConstrÛi o controle a partir do mapa de clientes. 
+	* Constr√≥i o controle a partir do mapa de clientes. 
 	*
 	*/
 	public ClienteController() {
@@ -48,7 +49,7 @@ public class ClienteController {
 	}
 	
 	/**
-	* Verifica se os par‚metros passados s„o v·lidos e, caso sejam, cadastra o cliente, caso contr·rio, lanÁa uma exceÁ„o.
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, cadastra o cliente, caso contr√°rio, lan√ßa uma exce√ß√£o.
 	*
 	* @param cpf o cpf do cliente
 	* @param nome o nome do cliente
@@ -63,11 +64,11 @@ public class ClienteController {
 	}
 	
 	/**
-	* Verifica se o cpf do cliente passado como par‚metro est· cadastrado e, caso n„o esteja, lanÁa a exceÁ„o mais adequada, 
-	* caso esteja, retorna a representaÁ„o em String do cliente. 
+	* Verifica se o cpf do cliente passado como par√¢metro est√° cadastrado e, caso n√£o esteja, lan√ßa a exce√ß√£o mais adequada, 
+	* caso esteja, retorna a representa√ß√£o em String do cliente. 
 	* 
 	* @param cpf o cpf do cliente
-	* @return uma representaÁ„o em String do cliente, se o mesmo estiver cadastrado.
+	* @return uma representa√ß√£o em String do cliente, se o mesmo estiver cadastrado.
 	*/
 	public String exibeCliente(String cpf) {
 		if (!clientes.containsKey(cpf)) {
@@ -77,9 +78,9 @@ public class ClienteController {
 	}
 	
 	/**
-	* Exibe a representaÁ„o textual de todos os clientes cadastrados no sistema.
+	* Exibe a representa√ß√£o textual de todos os clientes cadastrados no sistema.
 	*   
-	* @return uma representaÁ„o em String dos clientes
+	* @return uma representa√ß√£o em String dos clientes
 	*/
 	public String exibeClientes() {
 		List<String> listaClientes = new ArrayList<>();
@@ -95,8 +96,8 @@ public class ClienteController {
 	}
 	
 	/**
-	* Verifica se o atributo e novoValor s„o v·lidos e se o cpf est· cadastrado, em caso positivo, edita o atributo, caso contr·rio,
-	* lanÁa a exceÁ„o mais adequada.
+	* Verifica se o atributo e novoValor s√£o v√°lidos e se o cpf est√° cadastrado, em caso positivo, edita o atributo, caso contr√°rio,
+	* lan√ßa a exce√ß√£o mais adequada.
 	*
 	* @param cpf o cpf do cliente
 	* @param atributo o atributo a ser editado
@@ -115,7 +116,7 @@ public class ClienteController {
 	}
 	
 	/**
-	* Verifica se o cpf do cliente passado como par‚metro est· cadastrado e, caso n„o esteja, lanÁa a exceÁ„o mais adequada, 
+	* Verifica se o cpf do cliente passado como par√¢metro est√° cadastrado e, caso n√£o esteja, lan√ßa a exce√ß√£o mais adequada, 
 	* caso esteja, remove o cadastro do cliente. 
 	* 
 	* @param cpf o cpf do cliente

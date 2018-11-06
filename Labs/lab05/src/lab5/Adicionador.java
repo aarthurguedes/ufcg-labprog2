@@ -1,15 +1,21 @@
 package lab5;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+/**
+* Representa√ß√£o de um objeto respons√°vel por adicionar Strings em listas.
+*
+* @author Arthur Guedes
+*/
 public class Adicionador {
 	
 	/**
-	* MÈtodo auxiliar que adiciona as representaÁıes (em String) dos clientes em uma lista e os ordena alfabeticamente.
+	* M√©todo auxiliar que adiciona as representa√ß√µes (em String) dos clientes em uma lista e os ordena alfabeticamente.
 	* 
-	* @param listaClientes a lista que armazenar· os clientes
+	* @param listaClientes a lista que armazenar√° os clientes
 	* @param clientes o mapa de clientes
 	*/
 	public void adicionaClientesEmLista(List<String> listaClientes, Map<String, Cliente> clientes) {
@@ -22,9 +28,9 @@ public class Adicionador {
 	}
 	
 	/**
-	* MÈtodo auxiliar que adiciona as representaÁıes (em String) dos fornecedores em uma lista e os ordena alfabeticamente.
+	* M√©todo auxiliar que adiciona as representa√ß√µes (em String) dos fornecedores em uma lista e os ordena alfabeticamente.
 	* 
-	* @param listaFornecedores a lista que armazenar· os fornecedores
+	* @param listaFornecedores a lista que armazenar√° os fornecedores
 	* @param fornecedores o mapa de fornecedores
 	*/
 	public void adicionaFornecedoresEmLista(List<String> listaFornecedores, Map<String, Fornecedor> fornecedores) {
@@ -37,33 +43,52 @@ public class Adicionador {
 	}
 	
 	/**
-	* MÈtodo auxiliar que adiciona as representaÁıes (em String) dos produtos de um dado fornecedor em uma lista e os ordena 
+	* M√©todo auxiliar que adiciona as representa√ß√µes (em String) dos produtos (e combos) de um dado fornecedor em uma lista e os ordena 
 	* alfabeticamente.
 	* 
 	* @param fornecedor o nome do fornecedor
-	* @param listaProdutosFornecedor a lista que armazenar· os produtos
+	* @param listaProdutosFornecedor a lista que armazenar√° os produtos
 	* @param produtos o mapa de produtos
+	* @param combos o mapa de combos
 	*/
-	public void adicionaProdutosFornecedorEmLista(String fornecedor, List<String> listaProdutosFornecedor, Map<String, Produto> produtos) {
-		for (Produto p: produtos.values()) {
+	public void adicionaProdutosFornecedorEmLista(String fornecedor, List<String> listaProdutosFornecedor, Map<String, ProdutoSimples> produtos, Map<String, Combo> combos) {
+		List<String> combosRestantes = new ArrayList<>();
+		
+		for (ProdutoSimples p: produtos.values()) {
 			if (p != null) {
 				listaProdutosFornecedor.add(fornecedor + " - " + p.toString() + " | ");
 			}
 		}
+		
+		for (Combo c: combos.values()) {
+			if (c != null) {
+				if (c.toString().contains("+")) {
+					combosRestantes.add(fornecedor + " - " + c.toString() + " | ");
+				} else {
+					listaProdutosFornecedor.add(fornecedor + " - " + c.toString() + " | ");
+				}
+			}
+		}
+		
 		Collections.sort(listaProdutosFornecedor);
+		Collections.sort(combosRestantes);
+		
+		for (String s: combosRestantes) {
+			listaProdutosFornecedor.add(s);
+		}
 	}
 	
 	/**
-	* MÈtodo auxiliar que adiciona as representaÁıes (em String) dos produtos de todos os fornecedores em uma lista e os ordena 
+	* M√©todo auxiliar que adiciona as representa√ß√µes (em String) dos produtos de todos os fornecedores em uma lista e os ordena 
 	* alfabeticamente pelos nomes dos fornecedores.
 	* 
-	* @param listaProdutos a lista que armazenar· os produtos
+	* @param listaProdutos a lista que armazenar√° os produtos
 	* @param fornecedores o mapa de fornecedores
 	*/
 	public void adicionaProdutosEmLista(List<String> listaProdutos, Map<String, Fornecedor> fornecedores) {
 		for (Fornecedor f: fornecedores.values()) {
 			if (f != null) {
-				for (Produto p: fornecedores.get(f.getNome()).getProdutos().values()) {
+				for (ProdutoSimples p: fornecedores.get(f.getNome()).getProdutos().values()) {
 					if (p != null) {
 						listaProdutos.add(f.getNome() + " - " + p.toString());
 					} 
@@ -71,5 +96,38 @@ public class Adicionador {
 			}
 		}
 		Collections.sort(listaProdutos);
+	}
+	
+	/**
+	* M√©todo auxiliar que adiciona as representa√ß√µes (em String) dos combos de todos os fornecedores em uma lista e os ordena 
+	* alfabeticamente pelos nomes dos fornecedores.
+	* 
+	* @param listaProdutos a lista que armazenar√° os combos
+	* @param fornecedores o mapa de fornecedores
+	*/
+	public void adicionaCombosEmLista(List<String> listaProdutos, Map<String, Fornecedor> fornecedores) {
+		List<String> combosRestantes = new ArrayList<>();
+		
+		for (Fornecedor f: fornecedores.values()) {
+			if (f != null) {
+				for (Combo c: fornecedores.get(f.getNome()).getCombos().values()) {
+					if (c != null) {
+						if (c.toString().contains("+")) {
+							combosRestantes.add(f.getNome() + " - " + c.toString());
+						} else {
+							listaProdutos.add(f.getNome() + " - " + c.toString());
+						}
+						
+					}
+				}
+			}
+		}
+		
+		Collections.sort(listaProdutos);
+		Collections.sort(combosRestantes);
+		
+		for (String s: combosRestantes) {
+			listaProdutos.add(s);
+		}
 	}
 }

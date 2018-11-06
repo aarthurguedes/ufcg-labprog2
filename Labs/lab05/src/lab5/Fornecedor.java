@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* RepresentaÁ„o de um fornecedor de lanches, que possui nome (identificaÁ„o ˙nica), email e telefone.
+* Representa√ß√£o de um fornecedor de lanches, que possui nome (identifica√ß√£o √∫nica), email e telefone.
 *
 * @author Arthur Guedes
 */
@@ -27,9 +27,13 @@ public class Fornecedor {
 	/**
 	* Mapa de produtos do fornecedor.
 	*/
-	private Map<String, Produto> produtos;
+	private Map<String, ProdutoSimples> produtosSimples;
 	/**
-	* Objeto Verificador de par‚metros.
+	* Mapa de combos do fornecedor.
+	*/
+	private Map<String, Combo> combos;
+	/**
+	* Objeto Verificador de par√¢metros.
 	*/
 	private VerificadorBase vb = new VerificadorBase();
 	/**
@@ -38,7 +42,7 @@ public class Fornecedor {
 	private Adicionador a = new Adicionador();
 	
 	/**
-	* ConstrÛi o fornecedor a partir do seu nome, email e telefone.
+	* Constr√≥i o fornecedor a partir do seu nome, email e telefone.
 	*
 	* @param nome o nome do fornecedor
 	* @param email o email do fornecedor
@@ -49,7 +53,8 @@ public class Fornecedor {
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
-		this.produtos = new HashMap<>();
+		this.produtosSimples = new HashMap<>();
+		this.combos = new HashMap<>();
 	}
 
 	/**
@@ -97,87 +102,216 @@ public class Fornecedor {
 	/**
 	 * @return os produtos do fornecedor
 	 */
-	public Map<String, Produto> getProdutos() {
-		return produtos;
+	public Map<String, ProdutoSimples> getProdutos() {
+		return produtosSimples;
 	}
 
 	/**
 	 * @param produtos os novos produtos do fornecedor
 	 */
-	public void setProdutos(Map<String, Produto> produtos) {
-		this.produtos = produtos;
+	public void setProdutos(Map<String, ProdutoSimples> produtos) {
+		this.produtosSimples = produtos;
 	}
 	
 	/**
-	* Verifica se os par‚metros passados s„o v·lidos e, caso sejam, cadastra o produto para o fornecedor, caso contr·rio, lanÁa uma 
-	* exceÁ„o. 
+	 * @return os combos do fornecedor
+	 */
+	public Map<String, Combo> getCombos() {
+		return combos;
+	}
+
+	/**
+	 * @param combos os novos combos do fornecedor
+	 */
+	public void setCombos(Map<String, Combo> combos) {
+		this.combos = combos;
+	}
+
+	/**
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, cadastra o produto para o fornecedor, caso contr√°rio, lan√ßa uma 
+	* exce√ß√£o. 
 	*
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
-	* @param preco o preÁo do produto
+	* @param descricao a descri√ß√£o do produto
+	* @param preco o pre√ßo do produto
 	*/
 	public void adicionarProduto(String nome, String descricao, String preco) {
 		vb.verificaParametrosAdicionarProduto(nome, descricao, preco);
-		produtos.put((nome + descricao), new Produto(preco, nome, descricao));
+		produtosSimples.put((nome + descricao), new ProdutoSimples(preco, nome, descricao));
 	}
 	
 	/**
-	* Exibe a representaÁ„o textual de um determinado produto do fornecedor.
+	* Exibe a representa√ß√£o textual de um determinado produto do fornecedor.
 	* 
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
-	* @return uma representaÁ„o em String de um produto do fornecedor
+	* @param descricao a descri√ß√£o do produto
+	* @return uma representa√ß√£o em String de um produto do fornecedor
 	*/
 	public String exibirProduto(String nome, String descricao) {
-		vb.verificaParametrosExibirProduto(nome, descricao, produtos);
-		return produtos.get(nome + descricao).toString(); 
+		vb.verificaParametrosExibirProduto(nome, descricao, produtosSimples, combos); 
+		if (produtosSimples.containsKey(nome + descricao)) {
+			return produtosSimples.get(nome + descricao).toString();
+		} else {
+			return combos.get(nome + descricao).toString();
+		}
+		 
 	}
 	
 	/**
-	* Exibe a representaÁ„o textual de todos os produtos do fornecedor.
+	* Exibe a representa√ß√£o textual de todos os produtos do fornecedor.
 	*   
-	* @return uma representaÁ„o em String dos produtos do fornecedor
+	* @return uma representa√ß√£o em String dos produtos do fornecedor
 	*/
 	public String exibirProdutos() {
 		List<String> listaProdutosFornecedor = new ArrayList<>();
-		a.adicionaProdutosFornecedorEmLista(this.nome, listaProdutosFornecedor, produtos);
+		a.adicionaProdutosFornecedorEmLista(this.nome, listaProdutosFornecedor, produtosSimples, combos);
 		
 		String retorno =  "";
 		for (String s: listaProdutosFornecedor) {
 			retorno += s;
 		}
+		
 		retorno = retorno.substring(0, retorno.length() - 3);
 		return retorno;
 	}
 	
 	/**
-	* Verifica se os par‚metros passados s„o v·lidos e, caso sejam, edita o preÁo do produto, caso n„o sejam, lanÁa uma exceÁ„o.
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, edita o pre√ßo do produto, caso n√£o sejam, lan√ßa uma exce√ß√£o.
 	*
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
-	* @param novoPreco o novo preÁo do produto
+	* @param descricao a descri√ß√£o do produto
+	* @param novoPreco o novo pre√ßo do produto
 	*/
 	public void editarProduto(String nome, String descricao, String novoPreco) {
-		vb.verificaParametrosEditarProduto(nome, descricao, novoPreco, produtos);
-		produtos.get(nome + descricao).setPreco(novoPreco);
-		
+		vb.verificaParametrosEditarProduto(nome, descricao, novoPreco, produtosSimples);
+		produtosSimples.get(nome + descricao).setPreco(novoPreco);
 	}
 	
 	/**
-	* Verifica se os par‚metros passados s„o v·lidos e, caso sejam, remove o produto, caso contr·rio, lanÁa uma exceÁ„o. 
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, remove o produto, caso contr√°rio, lan√ßa uma exce√ß√£o. 
 	* 
 	* @param nome o nome do produto
-	* @param descricao a descricao do produtos
+	* @param descricao a descricao do produto
 	*/
 	public void removerProduto(String nome, String descricao) {
-		vb.verificaParametrosRemoverProduto(nome, descricao, produtos);
-		produtos.remove(nome + descricao);
+		vb.verificaParametrosRemoverProduto(nome, descricao, produtosSimples, combos);
+		if (produtosSimples.containsKey(nome + descricao)) {
+			produtosSimples.remove(nome + descricao);
+		} else {
+			combos.remove(nome + descricao); 
+		}
 	}
-
+	
+	/**
+	* M√©todo auxiliar que forma as chaves dos produtos passados como par√¢metros.
+	* 
+	* @param numProduto o numero do produto que se quer a chave
+	* @param produtos a String que representa os produtos
+	* @return a String que representa a key do produto
+	*/ 
+	private String pegaKeyProduto(int numProduto, String produtos) {
+		String produto[] = produtos.split(", ");
+		
+		if (numProduto == 1) {
+			String p[] = produto[0].split(" - ");
+			String key = p[0] + p[1];
+			return key;
+		} else {
+			String p[] = produto[1].split(" - ");
+			String key = p[0] + p[1];
+			return key;
+		}
+	}
+	
+	/**
+	* M√©todo auxiliar que calcula o pre√ßo do combo.
+	* 
+	* @param fator o fator de desconto
+	* @param produtos a String que representa os produtos
+	* @param produtosSimples o mapa de produtos que formam o combo
+	* @return a String que representa o pre√ßo do combo
+	*/ 
+	private String calculaPrecoCombo(String fator, String produtos, Map<String, ProdutoSimples> produtosSimples) {
+		Float precoProduto1 = Float.parseFloat(produtosSimples.get(pegaKeyProduto(1, produtos)).getPreco());
+		Float precoProduto2 = Float.parseFloat(produtosSimples.get(pegaKeyProduto(2, produtos)).getPreco());
+		Float desconto = (precoProduto1 + precoProduto2) * Float.parseFloat(fator);
+		Float precoFinal = (precoProduto1 + precoProduto2) - desconto;
+		return Float.toString(precoFinal);
+	}
+	
+	/**
+	* M√©todo auxiliar que verifica se os produtos do combo s√£o v√°lidos.
+	* 
+	* @param produtos os produtos que far√£o parte do combo
+	*/ 
+	private void verificaProdutosCombo(String produtos) {
+		String keyProduto1 = pegaKeyProduto(1, produtos);
+		String keyProduto2 = pegaKeyProduto(2, produtos);
+		
+		if (!produtosSimples.containsKey(keyProduto1) || !produtosSimples.containsKey(keyProduto2)) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: produto nao existe.");
+		} else if (combos.containsKey(keyProduto1) || combos.containsKey(keyProduto2)) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: um combo n√£o pode possuir combos na lista de produtos.");
+		}
+	}
+	
+	/**
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, cadastra o combo para o fornecedor, caso contr√°rio, lan√ßa uma 
+	* exce√ß√£o. 
+	*
+	* @param nome o nome do combo
+	* @param descricao a descri√ß√£o do combo
+	* @param fator o fator de desconto
+	* @param produtos os produtos que v√£o compor o combo
+	*/
+	public void adicionarCombo(String nome, String descricao, String fator, String produtos) {
+		vb.verificaParametrosAdicionarCombo(nome, descricao, fator, produtos, combos);
+		verificaProdutosCombo(produtos);
+		String keyCombo = nome + descricao;
+		String keyProduto1 = pegaKeyProduto(1, produtos);
+		String keyProduto2 = pegaKeyProduto(2, produtos);
+		combos.put((keyCombo), new Combo(nome, descricao, fator, produtos));
+		combos.get(keyCombo).setPreco(calculaPrecoCombo(fator, produtos, produtosSimples));
+		combos.get(keyCombo).getProdutosSimples().put(keyProduto1, produtosSimples.get(keyProduto1));
+		combos.get(keyCombo).getProdutosSimples().put(keyProduto2, produtosSimples.get(keyProduto2));
+	}
+	
+	/**
+	* M√©todo auxiliar que calcula o novopre√ßo do combo.
+	* 
+	* @param nome o nome do combo
+	* @param descricao a descricao do combo
+	* @param novoFator o novo fator de desconto
+	* @return a String que representa o pre√ßo do combo
+	*/ 
+	private String calculaNovoPrecoCombo(String nome, String descricao, String novoFator) {
+		double fatorAntigo = Double.parseDouble(combos.get(nome + descricao).getFator());
+		double precoAntigo = Double.parseDouble(combos.get(nome + descricao).getPreco());
+		double porcentagemDescontoAntigo = 100 - (100 - (100 * fatorAntigo));
+		double valorDescontoAntigo = (precoAntigo * porcentagemDescontoAntigo) / (100 - porcentagemDescontoAntigo);
+		double precoAntigoTotal = precoAntigo + valorDescontoAntigo;
+		double valorDescontoNovo = precoAntigoTotal * Double.parseDouble(novoFator);
+		double novoPreco = precoAntigoTotal - valorDescontoNovo;
+		return Double.toString(novoPreco);
+	}
+	
+	/**
+	* Verifica se os par√¢metros passados s√£o v√°lidos e, caso sejam, edita o pre√ßo do combo, caso n√£o sejam, lan√ßa uma exce√ß√£o.
+	*
+	* @param nome o nome do combo
+	* @param descricao a descri√ß√£o do combo
+	* @param novoFator o novo fator de desconto do combo
+	*/
+	public void editarCombo(String nome, String descricao, String novoFator) {
+		vb.verificaParametrosEditarCombo(nome, descricao, novoFator, combos);
+		combos.get(nome + descricao).setPreco(calculaNovoPrecoCombo(nome, descricao, novoFator));
+		combos.get(nome + descricao).setFator(novoFator);
+	}
+	
 	/**
 	* Retorna a String que representa o fornecedor no formato: nome - email - telefone.
 	* 
-	* @return a representaÁ„o em String do fornecedor.
+	* @return a representa√ß√£o em String do fornecedor.
 	*/
 	@Override
 	public String toString() {
@@ -185,9 +319,9 @@ public class Fornecedor {
 	}
 
 	/**
-	* Retorna o valor int que representa a posiÁ„o do objeto na memÛria.
+	* Retorna o valor int que representa a posi√ß√£o do objeto na mem√≥ria.
 	* 
-	* @return a representaÁ„o numÈrica do objeto.  
+	* @return a representa√ß√£o num√©rica do objeto.  
 	*/
 	@Override
 	public int hashCode() {
@@ -198,11 +332,11 @@ public class Fornecedor {
 	}
 
 	/**
-	* Retorna o valor boolean que representa se dois fornecedores s„o iguais, ou seja, se possuem
-	* o mesmo nome (identificaÁ„o ˙nica do fornecedor).
+	* Retorna o valor boolean que representa se dois fornecedores s√£o iguais, ou seja, se possuem
+	* o mesmo nome (identifica√ß√£o √∫nica do fornecedor).
 	* 
 	* @param obj o objeto que representa o outro fornecedor
-	* @return o valor boolean da igualdade (ou n„o) entre dois fornecedores.  
+	* @return o valor boolean da igualdade (ou n√£o) entre dois fornecedores.  
 	*/
 	@Override
 	public boolean equals(Object obj) {

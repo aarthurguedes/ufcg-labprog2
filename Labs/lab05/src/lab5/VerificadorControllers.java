@@ -1,16 +1,16 @@
-	package lab5;
+package lab5;
 
 import java.util.Map;
 
 /**
-* RepresentaÁ„o de um verificador, respons·vel por verificar atributos/par‚metros das classes ClienteController e FornecedorController.
+* Representa√ß√£o de um verificador, respons√°vel por verificar atributos/par√¢metros das classes ClienteController e FornecedorController.
 *
 * @author Arthur Guedes
 */
 public class VerificadorControllers {
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para o cadastramento do cliente e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para o cadastramento do cliente e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param cpf o cpf do cliente
 	* @param nome o nome do cliente
@@ -35,7 +35,7 @@ public class VerificadorControllers {
 	}
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para a ediÁ„o do cliente e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para a edi√ß√£o do cliente e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param cpf o cpf do cliente
 	* @param atributo o atributo o qual se quer editar
@@ -57,7 +57,7 @@ public class VerificadorControllers {
 	}
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para o cadastramento do fornecedor e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para o cadastramento do fornecedor e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param nome o nome do fornecedor
 	* @param email o email do fornecedor
@@ -75,7 +75,7 @@ public class VerificadorControllers {
 	}
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para a ediÁ„o do fornecedor e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para a edi√ß√£o do fornecedor e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param atributo o atributo o qual se quer editar
 	* @param novoValor o novo valor para o atributo
@@ -95,12 +95,12 @@ public class VerificadorControllers {
 	}
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para o cadastramento do produto e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para o cadastramento do produto e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param fornecedor o nome do fornecedor
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
-	* @param preco o preÁo do produto
+	* @param descricao a descri√ß√£o do produto
+	* @param preco o pre√ßo do produto
 	* @param fornecedores o mapa de fornecedores
 	*/ 
 	public void verificaParametrosAdicionaProduto(String fornecedor, String nome, String descricao, String preco, Map<String, Fornecedor> fornecedores) {
@@ -122,10 +122,10 @@ public class VerificadorControllers {
 	}
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para a exibiÁ„o do produto e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para a exibi√ß√£o do produto e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
+	* @param descricao a descri√ß√£o do produto
 	* @param fornecedor o nome do fornecedor do produto
 	* @param fornecedores o mapa de fornecedores
 	*/ 
@@ -140,18 +140,19 @@ public class VerificadorControllers {
 			throw new IllegalArgumentException(msgErro + "fornecedor nao existe.");
 		} else if (descricao.trim().equals("")) {
 			throw new IllegalArgumentException(msgErro + "descricao nao pode ser vazia ou nula.");
-		} else if (!fornecedores.get(fornecedor).getProdutos().containsKey(nome + descricao)) {
+		} else if (!fornecedores.get(fornecedor).getProdutos().containsKey(nome + descricao) && 
+				!fornecedores.get(fornecedor).getCombos().containsKey(nome + descricao)) {
 			throw new IllegalArgumentException(msgErro + "produto nao existe.");
 		}
 	}
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para a ediÁ„o do produto e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para a edi√ß√£o do produto e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param nome o nome do produto
 	* @param descricao a descricao do produto
 	* @param fornecedor o fornecedor do produto
-	* @param novoPreco o novo preÁo para o produto
+	* @param novoPreco o novo pre√ßo para o produto
 	* @param fornecedores o mapa de fornecedores
 	*/ 
 	public void verificaParametrosEditaProduto(String nome, String descricao, String fornecedor, String novoPreco, Map<String, Fornecedor> fornecedores) {
@@ -171,7 +172,7 @@ public class VerificadorControllers {
 	}
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para a remoÁ„o do produto e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para a remo√ß√£o do produto e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param nome o nome do produto
 	* @param descricao a descricao do produto
@@ -189,7 +190,68 @@ public class VerificadorControllers {
 			throw new IllegalArgumentException(msgErro + "fornecedor nao pode ser vazio ou nulo.");
 		} else if (!fornecedores.containsKey(fornecedor)) {
 			throw new IllegalArgumentException(msgErro + "fornecedor nao existe."); 
-		} else if (!fornecedores.get(fornecedor).getProdutos().containsKey(nome + descricao)) {
+		} else if (!fornecedores.get(fornecedor).getProdutos().containsKey(nome + descricao) && !fornecedores.get(fornecedor).getCombos().containsKey(nome + descricao)) {
+			throw new IllegalArgumentException(msgErro + "produto nao existe.");
+		}
+	}
+	
+	/**
+	* M√©todo auxiliar que verifica os par√¢metros passados para o cadastramento do combo e lan√ßa a exce√ß√£o adequada 
+	* quando necess√°rio.
+	* 
+	* @param fornecedor o nome do fornecedor
+	* @param nome o nome do combo
+	* @param descricao a descri√ß√£o do combo
+	* @param fator o fator de desconto do combo
+	* @param produtos os produtos que far√£o parte do combo
+	* @param fornecedores o mapa de fornecedores
+	*/
+	public void verificaParametrosAdicionaCombo(String fornecedor, String nome, String descricao, String fator, 
+			String produtos, Map<String, Fornecedor> fornecedores) {
+		String msgErro = "Erro no cadastro de combo: ";
+		String keyCombo = nome + descricao;
+		
+		if (fornecedor.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "fornecedor nao pode ser vazio ou nulo.");	
+		} else if (!fornecedores.containsKey(fornecedor)) {
+			throw new IllegalArgumentException(msgErro + "fornecedor nao existe.");
+		} else if (fornecedores.get(fornecedor).getCombos().containsKey(keyCombo)) {
+			throw new IllegalArgumentException(msgErro + "combo ja existe.");
+		} else if (nome.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
+		} else if (descricao.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "descricao nao pode ser vazia ou nula.");
+		} else if (Float.parseFloat(fator) < 0 || Float.parseFloat(fator) >= 1) {
+			throw new IllegalArgumentException(msgErro + "fator invalido.");
+		} else if (produtos.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "combo deve ter produtos.");
+		}
+	}
+	
+	/**
+	* M√©todo auxiliar que verifica os par√¢metros passados para a edi√ß√£o do combo e lan√ßa a exce√ß√£o adequada quando necess√°rio.
+	* 
+	* @param nome o nome do combo
+	* @param descricao a descricao do combo
+	* @param fornecedor o fornecedor do combo
+	* @param novoFator o novo fator de desconto do combo
+	* @param fornecedores o mapa de fornecedores
+	*/ 
+	public void verificaParametrosEditaCombo(String nome, String descricao, String fornecedor, String novoFator, 
+			Map<String, Fornecedor> fornecedores) {
+		String msgErro = "Erro na edicao de combo: ";
+		
+		if (nome.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
+		} else if (descricao.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "descricao nao pode ser vazia ou nula.");
+		} else if (fornecedor.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "fornecedor nao pode ser vazio ou nulo.");
+		} else if (!fornecedores.containsKey(fornecedor)) {
+			throw new IllegalArgumentException(msgErro + "fornecedor nao existe.");
+		} else if (Float.parseFloat(novoFator) <= 0 || Float.parseFloat(novoFator) >= 1) {
+			throw new IllegalArgumentException(msgErro + "fator invalido.");
+		} else if (!fornecedores.get(fornecedor).getCombos().containsKey(nome + descricao)) {
 			throw new IllegalArgumentException(msgErro + "produto nao existe.");
 		}
 	}

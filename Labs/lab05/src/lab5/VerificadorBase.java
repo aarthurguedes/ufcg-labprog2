@@ -3,14 +3,14 @@ package lab5;
 import java.util.Map;
 
 /**
-* RepresentaÁ„o de um verificador, respons·vel por verificar atributos/par‚metros das classes Cliente, Fornecedor e Produto.
+* Representa√ß√£o de um verificador, respons√°vel por verificar atributos/par√¢metros das classes Cliente, Fornecedor e Produto.
 *
 * @author Arthur Guedes
 */
 public class VerificadorBase {
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para a construÁ„o do cliente e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para a constru√ß√£o do cliente e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param cpf o cpf do cliente
 	* @param nome o nome do cliente
@@ -18,7 +18,7 @@ public class VerificadorBase {
 	* @param localizacao o local de trabalho do cliente
 	*/ 
 	public void verificaParametrosCliente(String cpf, String nome, String email, String localizacao) {
-		String msgErro = "Erro na construÁ„o do cliente: ";
+		String msgErro = "Erro na constru√ß√£o do cliente: ";
 		
 		if (nome.trim().equals("")) {
 			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
@@ -34,14 +34,14 @@ public class VerificadorBase {
 	}
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para a construÁ„o do fornecedor e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para a constru√ß√£o do fornecedor e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param nome o nome do fornecedor
 	* @param email o email do fornecedor
 	* @param telefone o telefone do fornecedor
 	*/
 	public void verificaParametrosFornecedor(String nome, String email, String telefone) {
-		String msgErro = "Erro na construÁ„o do fornecedor: ";
+		String msgErro = "Erro na constru√ß√£o do fornecedor: ";
 		
 		if (nome.trim().equals("")) {
 			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
@@ -53,11 +53,11 @@ public class VerificadorBase {
 	}
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para a construÁ„o do produto e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para a constru√ß√£o do produto e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
-	* @param preco o preÁo do produto
+	* @param descricao a descri√ß√£o do produto
+	* @param preco o pre√ßo do produto
 	*/ 
 	public void verificaParametrosProduto(String nome, String descricao, String preco) {
 		String msgErro = "Erro no cadastro de produto: ";
@@ -74,11 +74,11 @@ public class VerificadorBase {
 	}
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para o cadastramento do produto e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para o cadastramento do produto e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
-	* @param preco o preÁo do produto
+	* @param descricao a descri√ß√£o do produto
+	* @param preco o pre√ßo do produto
 	*/
 	public void verificaParametrosAdicionarProduto(String nome, String descricao, String preco) {
 		String msgErro = "Erro no cadastro de produto: ";
@@ -95,33 +95,33 @@ public class VerificadorBase {
 	}
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para a exibiÁ„o do produto e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para a exibi√ß√£o do produto e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
+	* @param descricao a descri√ß√£o do produto
 	* @param produtos o mapa de produtos
 	*/
-	public void verificaParametrosExibirProduto(String nome, String descricao, Map<String, Produto> produtos) {
+	public void verificaParametrosExibirProduto(String nome, String descricao, Map<String, ProdutoSimples> produtosSimples, Map<String, Combo> combos) {
 		String msgErro = "Erro na exibicao de produto: ";
 		
 		if (nome.trim().equals("")) {
 			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
 		} else if (descricao.trim().equals("")) {
 			throw new IllegalArgumentException(msgErro + "descricao nao pode ser vazia ou nula.");
-		} else if (!produtos.containsKey(nome + descricao)) {
+		} else if (!produtosSimples.containsKey(nome + descricao) && !combos.containsKey(nome + descricao)) {
 			throw new IllegalArgumentException(msgErro + "produto nao existe.");
-		}
+		} 
 	}
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para a ediÁ„o do produto e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para a edi√ß√£o do produto e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
-	* @param novoPreco o novo preÁo do produto
+	* @param descricao a descri√ß√£o do produto
+	* @param novoPreco o novo pre√ßo do produto
 	* @param produtos o mapa de produtos
 	*/
-	public void verificaParametrosEditarProduto(String nome, String descricao, String novoPreco, Map<String, Produto> produtos) {
+	public void verificaParametrosEditarProduto(String nome, String descricao, String novoPreco, Map<String, ProdutoSimples> produtos) {
 		String msgErro = "Erro na edicao de produto: ";
 		
 		if (Float.parseFloat(novoPreco) < 0) {
@@ -136,20 +136,92 @@ public class VerificadorBase {
 	}
 	
 	/**
-	* MÈtodo auxiliar que verifica os par‚metros passados para a remoÁ„o do produto e lanÁa a exceÁ„o adequada quando necess·rio.
+	* M√©todo auxiliar que verifica os par√¢metros passados para a remo√ß√£o do produto e lan√ßa a exce√ß√£o adequada quando necess√°rio.
 	* 
 	* @param nome o nome do produto
-	* @param descricao a descriÁ„o do produto
+	* @param descricao a descri√ß√£o do produto
 	* @param produtos o mapa de produtos
 	*/
-	public void verificaParametrosRemoverProduto(String nome, String descricao, Map<String, Produto> produtos) {
+	public void verificaParametrosRemoverProduto(String nome, String descricao, Map<String, ProdutoSimples> produtos, Map<String, Combo> combos) {
 		String msgErro = "Erro na remocao de produto: "; 
 		
 		if (nome.trim().equals("")) {
 			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
 		} else if (descricao.trim().equals("")) {
 			throw new IllegalArgumentException(msgErro + "descricao nao pode ser vazia ou nula.");
-		} else if (!produtos.containsKey(nome + descricao)) {
+		} else if (!produtos.containsKey(nome + descricao) && !combos.containsKey(nome + descricao)) {
+			throw new IllegalArgumentException(msgErro + "produto nao existe.");
+		}
+	}
+	
+	/**
+	* M√©todo auxiliar que verifica os par√¢metros passados para a constru√ß√£o do combo e lan√ßa a exce√ß√£o adequada quando necess√°rio.
+	* 
+	* @param nome o nome do combo
+	* @param descricao a descri√ß√£o do combo
+	* @param fator o fator de desconto do combo
+	* @param produtos os produtos do combo
+	*/ 
+	public void verificaParametrosCombo(String nome, String descricao, String fator, String produtos) {
+		String msgErro = "Erro no cadastro de combo: ";
+		
+		if (nome.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
+		} else if (descricao.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "descricao nao pode ser vazia ou nula.");
+		} else if (Float.parseFloat(fator) < 0 || Float.parseFloat(fator) >= 1) {
+			throw new IllegalArgumentException(msgErro + "fator invalido.");
+		} else if (produtos.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "combo deve ter produtos."); 
+		}
+	}
+	
+	/**
+	* M√©todo auxiliar que verifica os par√¢metros passados para o cadastramento do combo e lan√ßa a exce√ß√£o adequada 
+	* quando necess√°rio.
+	* 
+	* @param nome o nome do combo
+	* @param descricao a descri√ß√£o do combo
+	* @param fator o fator de desconto do combo
+	* @param produtos os produtos que far√£o parte do combo
+	* @param combos os combos do fornecedor
+	*/
+	public void verificaParametrosAdicionarCombo(String nome, String descricao, String fator, String produtos, Map<String, Combo> combos) {
+		String msgErro = "Erro no cadastro de combo: ";
+		String keyCombo = nome + descricao;
+		
+		if (combos.containsKey(keyCombo)) {
+			throw new IllegalArgumentException(msgErro + "combo ja existe.");
+		} else if (nome.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
+		} else if (descricao.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "descricao nao pode ser vazia ou nula.");
+		} else if (Float.parseFloat(fator) < 0 || Float.parseFloat(fator) >= 1) {
+			throw new IllegalArgumentException(msgErro + "fator invalido.");
+		} else if (produtos.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "combo deve ter produtos.");
+		}
+	}
+	
+	/**
+	* M√©todo auxiliar que verifica os par√¢metros passados para a edi√ß√£o do combo e lan√ßa a exce√ß√£o adequada 
+	* quando necess√°rio.
+	* 
+	* @param nome o nome do combo
+	* @param descricao a descri√ß√£o do combo
+	* @param novoFator o novo fator de desconto do combo
+	* @param combos o mapa de combos do fornecedor
+	*/
+	public void verificaParametrosEditarCombo(String nome, String descricao, String novoFator, Map<String, Combo> combos) {
+		String msgErro = "Erro na edicao de combo: ";
+		
+		if (nome.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "nome nao pode ser vazio ou nulo.");
+		} else if (descricao.trim().equals("")) {
+			throw new IllegalArgumentException(msgErro + "descricao nao pode ser vazia ou nula.");
+		} else if (Float.parseFloat(novoFator) <= 0 || Float.parseFloat(novoFator) >= 1) {
+			throw new IllegalArgumentException(msgErro + "fator invalido.");
+		} else if (!combos.containsKey(nome + descricao)) {
 			throw new IllegalArgumentException(msgErro + "produto nao existe.");
 		}
 	}
