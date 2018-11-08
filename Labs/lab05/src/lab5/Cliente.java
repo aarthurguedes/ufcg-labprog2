@@ -42,7 +42,7 @@ public class Cliente {
 	/**
 	* Objeto adicionador de strings em listas.
 	*/
-	private Adicionador a = new Adicionador();
+	private Adicionador a;
 	
 	/**
 	* Constrói o cliente a partir do seu cpf, nome, email e localização.
@@ -59,6 +59,7 @@ public class Cliente {
 		this.email = email;
 		this.localizacao = localizacao;
 		this.contas = new HashMap<>();
+		this.a = new Adicionador();
 	}
 	
 	/**

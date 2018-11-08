@@ -24,11 +24,11 @@ public class ClienteController {
 	/**
 	* Objeto Verificador de parãmetros.
 	*/
-	private VerificadorControllers vc = new VerificadorControllers();
+	private VerificadorControllers vc;
 	/**
 	* Objeto adicionador de strings em listas.
 	*/
-	private Adicionador a = new Adicionador();
+	private Adicionador a;
 	
 	/**
 	* Constrói o controle a partir do mapa de clientes. 
@@ -36,6 +36,8 @@ public class ClienteController {
 	*/
 	public ClienteController() {
 		this.clientes = new HashMap<>();
+		this.vc = new VerificadorControllers();
+		this.a = new Adicionador();
 	}
 	
 	/**

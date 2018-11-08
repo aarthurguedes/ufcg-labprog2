@@ -258,4 +258,26 @@ public class VerificadorControllers {
 			throw new IllegalArgumentException(msgErro + "produto nao existe.");
 		}
 	}
+	
+	/**
+	* Método auxiliar que verifica se os produtos do combo são válidos.
+	* 
+	* @param produtos os produtos que farão parte do combo
+	* @param fornecedor o nome do fornecedor
+	* @param keyProd1 a chave do produto 1
+	* @param keyProd2 a chave do produto 2
+	* @param fornecedores o mapa de fornecedores
+	*/ 
+	public void verificaProdutosCombo(String produtos, String fornecedor, String keyProd1, String keyProd2, Map<String, Fornecedor> fornecedores) {
+		String keyProduto1 = keyProd1;
+		String keyProduto2 = keyProd2;
+		
+		if (fornecedores.get(fornecedor).getCombos().containsKey(keyProduto1) || fornecedores.get(fornecedor).getCombos().
+					containsKey(keyProduto2)) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: um combo n�o pode possuir combos na lista de produtos.");
+		} else if (!fornecedores.get(fornecedor).getProdutos().containsKey(keyProduto1) || !fornecedores.get(fornecedor).
+				getProdutos().containsKey(keyProduto2)) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: produto nao existe.");
+		}
+	}
 }

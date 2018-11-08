@@ -19,7 +19,7 @@ public class Conta {
 	/**
 	* Objeto calculador de preços.
 	*/
-	private Calculador c = new Calculador();
+	private Calculador c;
 
 	/**
 	* Constrói a conta, inicializando a lista de compras.
@@ -27,6 +27,7 @@ public class Conta {
 	*/
 	public Conta() {
 		this.compras = new ArrayList<>();
+		this.c = new Calculador();
 	}
 
 	/**

@@ -24,11 +24,11 @@ public class FornecedorController {
 	/**
 	* Objeto Verificador de parâmetros.
 	*/
-	private VerificadorControllers vc = new VerificadorControllers();
+	private VerificadorControllers vc;
 	/**
 	* Objeto adicionador de strings em listas.
 	*/
-	private Adicionador a = new Adicionador();
+	private Adicionador a;
 	
 	/**
 	* Constrói o controle a partir do mapa de fornecedores. 
@@ -36,6 +36,8 @@ public class FornecedorController {
 	*/
 	public FornecedorController() {
 		this.fornecedores = new HashMap<>();
+		this.vc = new VerificadorControllers();
+		this.a = new Adicionador();
 	}
 	
 	/**
@@ -236,25 +238,6 @@ public class FornecedorController {
 	}
 	
 	/**
-	* Método auxiliar que verifica se os produtos do combo são válidos.
-	* 
-	* @param produtos os produtos que farão parte do combo
-	* @param fornecedor o nome do fornecedor
-	*/ 
-	private void verificaProdutosCombo(String produtos, String fornecedor) {
-		String keyProduto1 = pegaKeyProduto(1, produtos);
-		String keyProduto2 = pegaKeyProduto(2, produtos);
-		
-		if (fornecedores.get(fornecedor).getCombos().containsKey(keyProduto1) || fornecedores.get(fornecedor).getCombos().
-					containsKey(keyProduto2)) {
-			throw new IllegalArgumentException("Erro no cadastro de combo: um combo n�o pode possuir combos na lista de produtos.");
-		} else if (!fornecedores.get(fornecedor).getProdutos().containsKey(keyProduto1) || !fornecedores.get(fornecedor).
-				getProdutos().containsKey(keyProduto2)) {
-			throw new IllegalArgumentException("Erro no cadastro de combo: produto nao existe.");
-		}
-	}
-	
-	/**
 	* Verifica se os parâmetros passados são válidos e, caso sejam, cadastra o combo para o fornecedor, caso contrário, lança uma 
 	* exceção. 
 	*
@@ -266,7 +249,9 @@ public class FornecedorController {
 	*/
 	public void adicionaCombo(String fornecedor, String nome, String descricao, String fator, String produtos) {
 		vc.verificaParametrosAdicionaCombo(fornecedor, nome, descricao, fator, produtos, fornecedores);
-		verificaProdutosCombo(produtos, fornecedor);
+		String keyProd1 = pegaKeyProduto(1, produtos);
+		String keyProd2 = pegaKeyProduto(2, produtos);
+		vc.verificaProdutosCombo(produtos, fornecedor, keyProd1, keyProd2, fornecedores);
 		fornecedores.get(fornecedor).adicionarCombo(nome, descricao, fator, produtos); 
 	}
 	

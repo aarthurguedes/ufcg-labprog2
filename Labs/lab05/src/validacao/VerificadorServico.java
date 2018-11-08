@@ -4,7 +4,7 @@ import controllers.ClienteController;
 import controllers.FornecedorController;
 
 /**
-* Representação de um verificador dos serviços, responsável por verificar atributos/parâmetros da classe Servico.
+* Representação de um verificador dos parâmetros dos métodos de serviços entre clientes e fornecedores. 
 *
 * @author Arthur Guedes
 */

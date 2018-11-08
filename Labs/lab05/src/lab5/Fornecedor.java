@@ -43,11 +43,11 @@ public class Fornecedor {
 	/**
 	* Objeto adicionador de strings em listas.
 	*/
-	private Adicionador a = new Adicionador();
+	private Adicionador a;
 	/**
 	* Objeto calculador de preços.
 	*/
-	private Calculador c = new Calculador();
+	private Calculador c;
 	
 	/**
 	* Constrói o fornecedor a partir do seu nome, email e telefone.
@@ -63,6 +63,8 @@ public class Fornecedor {
 		this.telefone = telefone;
 		this.produtosSimples = new HashMap<>();
 		this.combos = new HashMap<>();
+		this.a = new Adicionador();
+		this.c = new Calculador();
 	}
 
 	/**
