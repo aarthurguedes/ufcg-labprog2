@@ -7,7 +7,7 @@ import java.util.Map;
 
 import ferramentas.Adicionador;
 import lab5.Fornecedor;
-import validacao.VerificadorControllers;
+import validacao.ValidadorControllers;
 
 /**
 * Representação de um controlador para os fornecedores, responsável por cadastrá-los, representá-los textualmente, editar os seus 
@@ -24,7 +24,7 @@ public class FornecedorController {
 	/**
 	* Objeto Verificador de parâmetros.
 	*/
-	private VerificadorControllers vc;
+	private ValidadorControllers vc;
 	/**
 	* Objeto adicionador de strings em listas.
 	*/
@@ -36,7 +36,7 @@ public class FornecedorController {
 	*/
 	public FornecedorController() {
 		this.fornecedores = new HashMap<>();
-		this.vc = new VerificadorControllers();
+		this.vc = new ValidadorControllers();
 		this.a = new Adicionador();
 	}
 	
@@ -63,7 +63,7 @@ public class FornecedorController {
 	* @return o nome do cliente;
 	*/
 	public String adicionaFornecedor(String nome, String email, String telefone) {
-		vc.verificaParametrosAdicionaFornecedor(nome, email, telefone, fornecedores);
+		vc.validaCadastramentoFornecedor(nome, email, telefone, fornecedores);
 		fornecedores.put(nome, new Fornecedor(nome, email, telefone));
 		return nome;
 	}
@@ -108,7 +108,7 @@ public class FornecedorController {
 	* @param novoValor o novo valor do atributo
 	*/
 	public void editaFornecedor(String nome, String atributo, String novoValor) {
-		vc.verificaParametrosEditaFornecedor(atributo, novoValor);
+		vc.validaEdicaoFornecedor(atributo, novoValor);
 		
 		if (atributo.equals("email")) {
 			fornecedores.get(nome).setEmail(novoValor);
@@ -142,7 +142,7 @@ public class FornecedorController {
 	* @param preco o preço do produto
 	*/
 	public void adicionaProduto(String fornecedor, String nome, String descricao, String preco) {
-		vc.verificaParametrosAdicionaProduto(fornecedor, nome, descricao, preco, fornecedores);
+		vc.validaCadastramentoProduto(fornecedor, nome, descricao, preco, fornecedores);
 		fornecedores.get(fornecedor).adicionarProduto(nome, descricao, preco);
 	}
 	
@@ -155,7 +155,7 @@ public class FornecedorController {
 	* @return uma representação em String do produto
 	*/
 	public String exibeProduto(String nome, String descricao, String fornecedor) {
-		vc.verificaParametrosExibeProduto(nome, descricao, fornecedor, fornecedores);
+		vc.validaExibicaoProduto(nome, descricao, fornecedor, fornecedores);
 		return fornecedores.get(fornecedor).exibirProduto(nome, descricao);
 	}
 	
@@ -200,7 +200,7 @@ public class FornecedorController {
 	* @param novoPreco o novo preço do produto
 	*/
 	public void editaProduto(String nome, String descricao, String fornecedor, String novoPreco) {
-		vc.verificaParametrosEditaProduto(nome, descricao, fornecedor, novoPreco, fornecedores);
+		vc.validaEdicaoProduto(nome, descricao, fornecedor, novoPreco, fornecedores);
 		fornecedores.get(fornecedor).editarProduto(nome, descricao, novoPreco);
 	}
 	
@@ -212,7 +212,7 @@ public class FornecedorController {
 	* @param fornecedor o nome do fornecedor
 	*/
 	public void removeProduto(String nome, String descricao, String fornecedor) {
-		vc.verificaParametrosRemoveProduto(nome, descricao, fornecedor, fornecedores);
+		vc.validaRemocaoProduto(nome, descricao, fornecedor, fornecedores);
 		fornecedores.get(fornecedor).removerProduto(nome, descricao);
 	}
 	
@@ -248,10 +248,10 @@ public class FornecedorController {
 	* @param produtos os produtos que vão compor o combo
 	*/
 	public void adicionaCombo(String fornecedor, String nome, String descricao, String fator, String produtos) {
-		vc.verificaParametrosAdicionaCombo(fornecedor, nome, descricao, fator, produtos, fornecedores);
+		vc.validaCadastramentoCombo(fornecedor, nome, descricao, fator, produtos, fornecedores);
 		String keyProd1 = pegaKeyProduto(1, produtos);
 		String keyProd2 = pegaKeyProduto(2, produtos);
-		vc.verificaProdutosCombo(produtos, fornecedor, keyProd1, keyProd2, fornecedores);
+		vc.validaProdutosCombo(produtos, fornecedor, keyProd1, keyProd2, fornecedores);
 		fornecedores.get(fornecedor).adicionarCombo(nome, descricao, fator, produtos); 
 	}
 	
@@ -265,7 +265,7 @@ public class FornecedorController {
 	* @param novoFator o novo fator de desconto do combo
 	*/
 	public void editaCombo(String nome, String descricao, String fornecedor, String novoFator) {
-		vc.verificaParametrosEditaCombo(nome, descricao, fornecedor, novoFator, fornecedores);
+		vc.validaEdicaoCombo(nome, descricao, fornecedor, novoFator, fornecedores);
 		fornecedores.get(fornecedor).editarCombo(nome, descricao, novoFator);
 	}
 }

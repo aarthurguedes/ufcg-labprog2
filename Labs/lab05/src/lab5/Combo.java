@@ -30,7 +30,7 @@ public class Combo extends ProdutoAbstrato {
 	* @param produtos os produtos que formam o combo
 	*/
 	public Combo(String nome, String descricao, String fator, String produtos) {
-		vb.verificaParametrosCombo(nome, descricao, fator, produtos);
+		vb.validaCombo(nome, descricao, fator, produtos);
 		this.nome = nome; 
 		this.descricao = descricao;
 		this.fator = fator;

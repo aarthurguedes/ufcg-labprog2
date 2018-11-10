@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import controllers.FornecedorController;
+
 class FornecedorControllerTest {
 	
 	private FornecedorController fc;
@@ -16,168 +18,329 @@ class FornecedorControllerTest {
 	
 	@Test
 	public void testAdicionaFornecedorValido() {
-		assertEquals("Dona Inês", fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050"));
+		assertEquals("Dona Inï¿½s", fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050"));
 	}
 	
 	@Test
 	public void testAdicionaFornecedorInvalido() {
 		assertThrows(IllegalArgumentException.class, () -> fc.adicionaFornecedor("", "dines@gmail.com", "83 9999-5050"));
-		assertThrows(IllegalArgumentException.class, () -> fc.adicionaFornecedor("Dona Inês", "", "83 9999-5050"));
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
-		assertThrows(IllegalArgumentException.class, () -> fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050"));
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaFornecedor("Dona Inï¿½s", "", "83 9999-5050"));
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050"));
 	}
 	
 	@Test
 	public void testExibeFornecedorValido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
-		assertEquals("Dona Inês - dines@gmail.com - 83 9999-5050", fc.exibeFornecedor("Dona Inês"));
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
+		assertEquals("Dona Inï¿½s - dines@gmail.com - 83 9999-5050", fc.exibeFornecedor("Dona Inï¿½s"));
 	}
 	
 	@Test
 	public void testExibeFornecedorInvalido() {
-		assertThrows(IllegalArgumentException.class, () -> fc.exibeFornecedor("Dona Inês"));
+		assertThrows(IllegalArgumentException.class, () -> fc.exibeFornecedor("Dona Inï¿½s"));
 	}
 	
 	@Test
 	public void testExibeFornecedores() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
 		fc.adicionaFornecedor("Josenilda", "nilda@computacao.ufcg.edu.br", "83 98736-5050");
 		fc.adicionaFornecedor("Ron Weasley", "rweasley@splab.ufcg.edu.br", "83 99936-5050");
-		assertEquals("Dona Inês - dines@gmail.com - 83 9999-5050 | Josenilda - nilda@computacao.ufcg.edu.br - 83 98736-5050 | "
+		assertEquals("Dona Inï¿½s - dines@gmail.com - 83 9999-5050 | Josenilda - nilda@computacao.ufcg.edu.br - 83 98736-5050 | "
 				+ "Ron Weasley - rweasley@splab.ufcg.edu.br - 83 99936-5050", fc.exibeFornecedores());
 	}
 	
 	@Test
 	public void testEditaFornecedorValido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
-		fc.editaFornecedor("Dona Inês", "email", "ines@gmail.com");
-		fc.editaFornecedor("Dona Inês", "telefone", "83 8888-4040");
-		assertEquals("Dona Inês - ines@gmail.com - 83 8888-4040", fc.exibeFornecedor("Dona Inês"));
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
+		fc.editaFornecedor("Dona Inï¿½s", "email", "ines@gmail.com");
+		fc.editaFornecedor("Dona Inï¿½s", "telefone", "83 8888-4040");
+		assertEquals("Dona Inï¿½s - ines@gmail.com - 83 8888-4040", fc.exibeFornecedor("Dona Inï¿½s"));
 	}
 	
 	@Test
 	public void testEditaFornecedorInvalido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
-		assertThrows(IllegalArgumentException.class, () -> fc.editaFornecedor("Dona Inês", "nome", "Inês"));
-		assertThrows(IllegalArgumentException.class, () -> fc.editaFornecedor("Dona Inês", "", "Inês"));
-		assertThrows(IllegalArgumentException.class, () -> fc.editaFornecedor("Dona Inês", "email", ""));
-		assertThrows(IllegalArgumentException.class, () -> fc.editaFornecedor("Dona Inês", "sobrenome", "Inês"));
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
+		assertThrows(IllegalArgumentException.class, () -> fc.editaFornecedor("Dona Inï¿½s", "nome", "Inï¿½s"));
+		assertThrows(IllegalArgumentException.class, () -> fc.editaFornecedor("Dona Inï¿½s", "", "Inï¿½s"));
+		assertThrows(IllegalArgumentException.class, () -> fc.editaFornecedor("Dona Inï¿½s", "email", ""));
+		assertThrows(IllegalArgumentException.class, () -> fc.editaFornecedor("Dona Inï¿½s", "sobrenome", "Inï¿½s"));
 	}
 	
 	@Test
 	public void testRemoveFornecedorValido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
-		fc.removeFornecedor("Dona Inês");
-		assertTrue(!fc.getFornecedores().containsKey("Dona Inês"));
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
+		fc.removeFornecedor("Dona Inï¿½s");
+		assertTrue(!fc.getFornecedores().containsKey("Dona Inï¿½s"));
 	}
 	
 	@Test
 	public void testRemoveFornecedorInvalido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
 		assertThrows(IllegalArgumentException.class, () -> fc.removeFornecedor(""));
-		assertThrows(IllegalArgumentException.class, () -> fc.removeFornecedor("Inês"));
+		assertThrows(IllegalArgumentException.class, () -> fc.removeFornecedor("Inï¿½s"));
 	}
 	
 	@Test
 	public void testAdicionaProdutoValido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
-		fc.adicionaProduto("Dona Inês", "Tapioca simples", "Tapioca com manteiga", "3.00");
-		assertTrue(fc.getFornecedores().get("Dona Inês").getProdutos().containsKey("Tapioca simplesTapioca com manteiga"));
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
+		fc.adicionaProduto("Dona Inï¿½s", "Tapioca simples", "Tapioca com manteiga", "3.00");
+		assertTrue(fc.getFornecedores().get("Dona Inï¿½s").getProdutos().containsKey("Tapioca simplesTapioca com manteiga"));
 	}
 	
 	@Test
 	public void testAdicionaProdutoInvalido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
 		assertThrows(IllegalArgumentException.class, () -> fc.adicionaProduto("", "Tapioca simples", "Tapioca com manteiga", "3.00"));
-		assertThrows(IllegalArgumentException.class, () -> fc.adicionaProduto("Dona Inês", "", "Tapioca com manteiga", "3.00"));
-		assertThrows(IllegalArgumentException.class, () -> fc.adicionaProduto("Dona Inês", "Tapioca simples", "", "3.00"));
-		assertThrows(IllegalArgumentException.class, () -> fc.adicionaProduto("Inês", "Tapioca simples", "Tapioca com manteiga", "3.00"));
-		assertThrows(IllegalArgumentException.class, () -> fc.adicionaProduto("Dona Inês", "Tapioca simples", "Tapioca com manteiga", "-3.00"));
-		fc.adicionaProduto("Dona Inês", "Tapioca simples", "Tapioca com manteiga", "3.00");
-		assertThrows(IllegalArgumentException.class, () -> fc.adicionaProduto("Dona Inês", "Tapioca simples", "Tapioca com manteiga", "3.00"));
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaProduto("Dona Inï¿½s", "", "Tapioca com manteiga", "3.00"));
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaProduto("Dona Inï¿½s", "Tapioca simples", "", "3.00"));
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaProduto("Inï¿½s", "Tapioca simples", "Tapioca com manteiga", "3.00"));
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaProduto("Dona Inï¿½s", "Tapioca simples", "Tapioca com manteiga", "-3.00"));
+		fc.adicionaProduto("Dona Inï¿½s", "Tapioca simples", "Tapioca com manteiga", "3.00");
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaProduto("Dona Inï¿½s", "Tapioca simples", "Tapioca com manteiga", "3.00"));
 	}
 	
 	@Test
 	public void testExibeProdutoValido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
-		fc.adicionaProduto("Dona Inês", "Tapioca simples", "Tapioca com manteiga", "3.00");
-		assertEquals("Tapioca simples - Tapioca com manteiga - R$3,00", fc.exibeProduto("Tapioca simples", "Tapioca com manteiga", "Dona Inês"));
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
+		fc.adicionaProduto("Dona Inï¿½s", "Tapioca simples", "Tapioca com manteiga", "3.00");
+		assertEquals("Tapioca simples - Tapioca com manteiga - R$3,00", fc.exibeProduto("Tapioca simples", "Tapioca com manteiga", "Dona Inï¿½s"));
 	}
 	
 	@Test
 	public void testExibeProdutoInvalido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
-		fc.adicionaProduto("Dona Inês", "Tapioca simples", "Tapioca com manteiga", "3.00");
-		assertThrows(IllegalArgumentException.class, () -> fc.exibeProduto("", "Tapioca com manteiga", "Dona Inês"));
-		assertThrows(IllegalArgumentException.class, () -> fc.exibeProduto("Tapioca simples", "", "Dona Inês"));
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
+		fc.adicionaProduto("Dona Inï¿½s", "Tapioca simples", "Tapioca com manteiga", "3.00");
+		assertThrows(IllegalArgumentException.class, () -> fc.exibeProduto("", "Tapioca com manteiga", "Dona Inï¿½s"));
+		assertThrows(IllegalArgumentException.class, () -> fc.exibeProduto("Tapioca simples", "", "Dona Inï¿½s"));
 		assertThrows(IllegalArgumentException.class, () -> fc.exibeProduto("Tapioca simples", "Tapioca com manteiga", ""));
-		assertThrows(IllegalArgumentException.class, () -> fc.exibeProduto("Tapioca simples", "Tapioca com manteiga", "Inês"));
-		assertThrows(IllegalArgumentException.class, () -> fc.exibeProduto("Tapioca completa", "Tapioca com manteiga e queijo", "Dona Inês"));
+		assertThrows(IllegalArgumentException.class, () -> fc.exibeProduto("Tapioca simples", "Tapioca com manteiga", "Inï¿½s"));
+		assertThrows(IllegalArgumentException.class, () -> fc.exibeProduto("Tapioca completa", "Tapioca com manteiga e queijo", "Dona Inï¿½s"));
 	}
 	
 	@Test
 	public void testExibeProdutosFornecedorValido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
-		fc.adicionaProduto("Dona Inês", "Tapioca simples", "Tapioca com manteiga", "3.00");
-		fc.adicionaProduto("Dona Inês", "Tapioca completa", "Tapioca com manteiga e queijo", "3.50");
-		assertEquals("Dona Inês - Tapioca completa - Tapioca com manteiga e queijo - R$3,50 | Dona Inês - Tapioca simples - "
-				+ "Tapioca com manteiga - R$3,00", fc.exibeProdutosFornecedor("Dona Inês"));
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
+		fc.adicionaProduto("Dona Inï¿½s", "Tapioca simples", "Tapioca com manteiga", "3.00");
+		fc.adicionaProduto("Dona Inï¿½s", "Tapioca completa", "Tapioca com manteiga e queijo", "3.50");
+		assertEquals("Dona Inï¿½s - Tapioca completa - Tapioca com manteiga e queijo - R$3,50 | Dona Inï¿½s - Tapioca simples - "
+				+ "Tapioca com manteiga - R$3,00", fc.exibeProdutosFornecedor("Dona Inï¿½s"));
 	}
 	
 	@Test
 	public void testExibeProdutosFornecedorInvalido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
-		fc.adicionaProduto("Dona Inês", "Tapioca simples", "Tapioca com manteiga", "3.00");
-		fc.adicionaProduto("Dona Inês", "Tapioca completa", "Tapioca com manteiga e queijo", "3.50");
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
+		fc.adicionaProduto("Dona Inï¿½s", "Tapioca simples", "Tapioca com manteiga", "3.00");
+		fc.adicionaProduto("Dona Inï¿½s", "Tapioca completa", "Tapioca com manteiga e queijo", "3.50");
 		assertThrows(IllegalArgumentException.class, () -> fc.exibeProdutosFornecedor(""));
 	}
 	
 	@Test
 	public void testExibeProdutos() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
 		fc.adicionaFornecedor("Josenilda", "josenilda@gmail.com", "83 8888-4040");
-		fc.adicionaProduto("Dona Inês", "Tapioca simples", "Tapioca com manteiga", "3.00");
+		fc.adicionaProduto("Dona Inï¿½s", "Tapioca simples", "Tapioca com manteiga", "3.00");
 		fc.adicionaProduto("Josenilda", "Tapioca completa", "Tapioca com manteiga e queijo", "3.50");
-		assertEquals("Dona Inês - Tapioca simples - Tapioca com manteiga - R$3,00 | Josenilda - Tapioca completa - "
+		assertEquals("Dona Inï¿½s - Tapioca simples - Tapioca com manteiga - R$3,00 | Josenilda - Tapioca completa - "
 				+ "Tapioca com manteiga e queijo - R$3,50", fc.exibeProdutos());
 	}
 	
 	@Test
 	public void testEditaProdutoValido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
-		fc.adicionaProduto("Dona Inês", "Tapioca simples", "Tapioca com manteiga", "3.00");
-		fc.editaProduto("Tapioca simples", "Tapioca com manteiga", "Dona Inês", "2.00");
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
+		fc.adicionaProduto("Dona Inï¿½s", "Tapioca simples", "Tapioca com manteiga", "3.00");
+		fc.editaProduto("Tapioca simples", "Tapioca com manteiga", "Dona Inï¿½s", "2.00");
 		assertEquals("Tapioca simples - Tapioca com manteiga - R$2,00", 
-				fc.exibeProduto("Tapioca simples", "Tapioca com manteiga", "Dona Inês"));
+				fc.exibeProduto("Tapioca simples", "Tapioca com manteiga", "Dona Inï¿½s"));
 	}
 	
 	@Test
 	public void testEditaProdutoInvalido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
-		fc.adicionaProduto("Dona Inês", "Tapioca simples", "Tapioca com manteiga", "3.00");
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
+		fc.adicionaProduto("Dona Inï¿½s", "Tapioca simples", "Tapioca com manteiga", "3.00");
 		assertThrows(IllegalArgumentException.class, () -> fc.editaProduto("Tapioca simples", "Tapioca com manteiga", "", "2.00"));
-		assertThrows(IllegalArgumentException.class, () -> fc.editaProduto("Tapioca simples", "Tapioca com manteiga", "Dona Inês", "-2.00"));
-		assertThrows(IllegalArgumentException.class, () -> fc.editaProduto("", "Tapioca com manteiga", "Dona Inês", "2.00"));
-		assertThrows(IllegalArgumentException.class, () -> fc.editaProduto("Tapioca simples", "", "Dona Inês", "-2.00"));
-		assertThrows(IllegalArgumentException.class, () -> fc.editaProduto("Tapioca simples", "Tapioca com manteiga", "Inês", "2.00"));
+		assertThrows(IllegalArgumentException.class, () -> fc.editaProduto("Tapioca simples", "Tapioca com manteiga", "Dona Inï¿½s", "-2.00"));
+		assertThrows(IllegalArgumentException.class, () -> fc.editaProduto("", "Tapioca com manteiga", "Dona Inï¿½s", "2.00"));
+		assertThrows(IllegalArgumentException.class, () -> fc.editaProduto("Tapioca simples", "", "Dona Inï¿½s", "-2.00"));
+		assertThrows(IllegalArgumentException.class, () -> fc.editaProduto("Tapioca simples", "Tapioca com manteiga", "Inï¿½s", "2.00"));
 	}
 	
 	@Test
 	public void testRemoveProdutoValido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
-		fc.adicionaProduto("Dona Inês", "Tapioca simples", "Tapioca com manteiga", "3.00");
-		fc.removeProduto("Tapioca simples", "Tapioca com manteiga", "Dona Inês");
-		assertTrue(!fc.getFornecedores().get("Dona Inês").getProdutos().containsKey("Tapioca simplesTapioca com manteiga"));
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
+		fc.adicionaProduto("Dona Inï¿½s", "Tapioca simples", "Tapioca com manteiga", "3.00");
+		fc.removeProduto("Tapioca simples", "Tapioca com manteiga", "Dona Inï¿½s");
+		assertTrue(!fc.getFornecedores().get("Dona Inï¿½s").getProdutos().containsKey("Tapioca simplesTapioca com manteiga"));
 	}
 	
 	@Test
 	public void testRemoveProdutoInvalido() {
-		fc.adicionaFornecedor("Dona Inês", "dines@gmail.com", "83 9999-5050");
-		fc.adicionaProduto("Dona Inês", "Tapioca simples", "Tapioca com manteiga", "3.00");
-		assertThrows(IllegalArgumentException.class, () -> fc.removeProduto("", "Tapioca com manteiga", "Dona Inês"));
-		assertThrows(IllegalArgumentException.class, () -> fc.removeProduto("Tapioca simples", "", "Dona Inês"));
+		fc.adicionaFornecedor("Dona Inï¿½s", "dines@gmail.com", "83 9999-5050");
+		fc.adicionaProduto("Dona Inï¿½s", "Tapioca simples", "Tapioca com manteiga", "3.00");
+		assertThrows(IllegalArgumentException.class, () -> fc.removeProduto("", "Tapioca com manteiga", "Dona Inï¿½s"));
+		assertThrows(IllegalArgumentException.class, () -> fc.removeProduto("Tapioca simples", "", "Dona Inï¿½s"));
 		assertThrows(IllegalArgumentException.class, () -> fc.removeProduto("Tapioca simples", "Tapioca com manteiga", ""));
-		assertThrows(IllegalArgumentException.class, () -> fc.removeProduto("Tapioca simples", "Tapioca com manteiga", "Inês"));
-		assertThrows(IllegalArgumentException.class, () -> fc.removeProduto("Tapioca completa", "Tapioca com manteiga e queijo", "Dona Inês"));
+		assertThrows(IllegalArgumentException.class, () -> fc.removeProduto("Tapioca simples", "Tapioca com manteiga", "Inï¿½s"));
+		assertThrows(IllegalArgumentException.class, () -> fc.removeProduto("Tapioca completa", "Tapioca com manteiga e queijo", "Dona Inï¿½s"));
+	}
+	
+	@Test
+	public void testAdicionaComboValido() {
+		fc.adicionaFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
+		fc.adicionaProduto("Seu Olavo", "X-burguer", "Hamburguer de carne com queijo e calabresa", "5.00");
+		fc.adicionaProduto("Seu Olavo", "Coca-cola", "Coca-cola (lata)", "3.00");
+		fc.adicionaCombo("Seu Olavo", "X-burguer + refrigerante", "X-burguer com refri (lata)", "0.20", "X-burguer - "
+				+ "Hamburguer de carne com queijo e calabresa, Coca-cola - Coca-cola (lata)");
+		assertTrue(fc.getFornecedores().get("Seu Olavo").getCombos().containsKey("X-burguer + refrigeranteX-burguer com refri (lata)"));
+	}
+	
+	@Test
+	public void testAdicionaComboInvalido() {
+		fc.adicionaFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
+		fc.adicionaProduto("Seu Olavo", "X-burguer", "Hamburguer de carne com queijo e calabresa", "5.00");
+		fc.adicionaProduto("Seu Olavo", "Coca-cola", "Coca-cola (lata)", "3.00");
+		fc.adicionaCombo("Seu Olavo", "X-burguer + refrigerante", "X-burguer com refri (lata)", "0.20", "X-burguer - "
+				+ "Hamburguer de carne com queijo e calabresa, Coca-cola - Coca-cola (lata)");
+		
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaCombo("", "X-burguer + refrigerante", "X-burguer com "
+				+ "refri (lata)", "0.20", "X-burguer - Hamburguer de carne com queijo e calabresa, Coca-cola - Coca-cola (lata)"));
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaCombo("Olavo", "X-burguer + refrigerante", "X-burguer com "
+				+ "refri (lata)", "0.20", "X-burguer - Hamburguer de carne com queijo e calabresa, Coca-cola - Coca-cola (lata)"));
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaCombo("Seu Olavo", "X-burguer + refrigerante", "X-burguer com "
+				+ "refri (lata)", "0.20", "X-burguer - Hamburguer de carne com queijo e calabresa, Coca-cola - Coca-cola (lata)"));
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaCombo("Seu Olavo", "", "X-burguer com "
+				+ "refri (lata)", "0.20", "X-burguer - Hamburguer de carne com queijo e calabresa, Coca-cola - Coca-cola (lata)"));
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaCombo("Seu Olavo", "X-burguer + refrigerante", "", 
+				"0.20", "X-burguer - Hamburguer de carne com queijo e calabresa, Coca-cola - Coca-cola (lata)"));
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaCombo("Seu Olavo", "X-burguer + refrigerante", "X-burguer com "
+				+ "refri (lata)", "-0.20", "X-burguer - Hamburguer de carne com queijo e calabresa, Coca-cola - Coca-cola (lata)"));
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaCombo("Seu Olavo", "X-burguer + refrigerante", "X-burguer com "
+				+ "refri (lata)", "1.00", "X-burguer - Hamburguer de carne com queijo e calabresa, Coca-cola - Coca-cola (lata)"));
+		assertThrows(IllegalArgumentException.class, () -> fc.adicionaCombo("Seu Olavo", "X-burguer + refrigerante", "X-burguer com "
+				+ "refri (lata)", "1.00", ""));
+	}
+	
+	@Test
+	public void testExibeComboValido() {
+		fc.adicionaFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
+		fc.adicionaProduto("Seu Olavo", "X-burguer", "Hamburguer de carne com queijo e calabresa", "4.50");
+		fc.adicionaProduto("Seu Olavo", "Coca-cola", "Coca-cola (lata)", "3.00");
+		fc.adicionaCombo("Seu Olavo", "X-burguer + refrigerante", "X-burguer com refri (lata)", "0.20", "X-burguer - "
+				+ "Hamburguer de carne com queijo e calabresa, Coca-cola - Coca-cola (lata)");
+		assertEquals("X-burguer + refrigerante - X-burguer com refri (lata) - R$6,00", fc.exibeProduto("X-burguer + refrigerante", "X-burguer com refri (lata)", 
+				"Seu Olavo"));
+	}
+	
+	@Test
+	public void testExibeComboInvalido() {
+		fc.adicionaFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
+		fc.adicionaProduto("Seu Olavo", "X-burguer", "Hamburguer de carne com queijo e calabresa", "4.50");
+		fc.adicionaProduto("Seu Olavo", "Coca-cola", "Coca-cola (lata)", "3.00");
+		fc.adicionaCombo("Seu Olavo", "X-burguer + refrigerante", "X-burguer com refri (lata)", "0.20", "X-burguer - "
+				+ "Hamburguer de carne com queijo e calabresa, Coca-cola - Coca-cola (lata)");
+		assertThrows(IllegalArgumentException.class, () -> fc.exibeProduto("", "X-burguer com refri (lata)", "Seu Olavo"));
+		assertThrows(IllegalArgumentException.class, () -> fc.exibeProduto("X-burguer + refrigerante", "X-burguer com refri (lata)", ""));
+		assertThrows(IllegalArgumentException.class, () -> fc.exibeProduto("X-burguer + refrigerante", "X-burguer com refri (lata)", "Olavo"));
+		assertThrows(IllegalArgumentException.class, () -> fc.exibeProduto("X-burguer + refrigerante", "", "Seu Olavo"));
+		assertThrows(IllegalArgumentException.class, () -> fc.exibeProduto("X-burguer com refrigerante", "X-burguer e refri (lata)", "Seu Olavo"));
+	}
+	
+	@Test
+	public void testExibirCombosFornecedorValido() {
+		fc.adicionaFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
+		fc.adicionaProduto("Seu Olavo", "X-burguer", "Hamburguer de carne com queijo e calabresa", "4.50");
+		fc.adicionaProduto("Seu Olavo", "Coca-cola", "Coca-cola (lata)", "3.00");
+		fc.adicionaCombo("Seu Olavo", "X-burguer + refrigerante", "X-burguer com refri (lata)", "0.20", "X-burguer - "
+				+ "Hamburguer de carne com queijo e calabresa, Coca-cola - Coca-cola (lata)");
+		
+		fc.adicionaProduto("Seu Olavo", "Coxao de Frango", "Coxao de frango com cheddar", "2.50");
+		fc.adicionaCombo("Seu Olavo", "Coxao de Frango + refrigerante", "Coxao de frango com refri", "0.25", 
+				"Coxao de Frango - Coxao de frango com cheddar, Coca-cola - Coca-cola (lata)");
+		
+		assertEquals("Seu Olavo - Coca-cola - Coca-cola (lata) - R$3,00 | Seu Olavo - Coxao de Frango - Coxao de frango "
+				+ "com cheddar - R$2,50 | Seu Olavo - X-burguer - Hamburguer de carne com queijo e calabresa - R$4,50 | "
+				+ "Seu Olavo - Coxao de Frango + refrigerante - Coxao de frango com refri - R$4,13 | Seu Olavo - "
+				+ "X-burguer + refrigerante - X-burguer com refri (lata) - R$6,00", fc.exibeProdutosFornecedor("Seu Olavo"));
+	}
+	
+	@Test
+	public void testExibirCombosFornecedorInvalido() {
+		assertThrows(IllegalArgumentException.class, () -> fc.exibeProdutosFornecedor(""));
+	}
+	
+	@Test
+	public void testExibirCombos() {
+		fc.adicionaFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
+		fc.adicionaProduto("Seu Olavo", "X-burguer", "Hamburguer de carne com queijo e calabresa", "4.50");
+		fc.adicionaProduto("Seu Olavo", "Coca-cola", "Coca-cola (lata)", "3.00");
+		fc.adicionaCombo("Seu Olavo", "X-burguer + refrigerante", "X-burguer com refri (lata)", "0.20", "X-burguer - "
+				+ "Hamburguer de carne com queijo e calabresa, Coca-cola - Coca-cola (lata)");
+		
+		fc.adicionaFornecedor("Marcos", "marcos@gmail.com", "83 99151-3570");
+		fc.adicionaProduto("Marcos", "Coxao de Frango", "Coxao de frango com cheddar", "2.50");
+		fc.adicionaProduto("Marcos", "Refrigerante", "Refrigerante (lata)", "2.50");
+		fc.adicionaCombo("Marcos", "Coxao com batata", "Coxao de frango com batata frita", "0.30", 
+				"Coxao de Frango - Coxao de frango com cheddar, Refrigerante - Refrigerante (lata)");
+		
+		assertEquals("Marcos - Coxao com batata - Coxao de frango com batata frita - R$3,50 | Marcos - Coxao de Frango - "
+				+ "Coxao de frango com cheddar - R$2,50 | Marcos - Refrigerante - Refrigerante (lata) - R$2,50 | Seu Olavo "
+				+ "- Coca-cola - Coca-cola (lata) - R$3,00 | Seu Olavo - X-burguer - Hamburguer de carne com queijo e "
+				+ "calabresa - R$4,50 | Seu Olavo - X-burguer + refrigerante - X-burguer com refri (lata) - R$6,00", fc.exibeProdutos());
+	}
+	
+	@Test
+	public void testEditaComboValido() {
+		fc.adicionaFornecedor("Marcos", "marcos@gmail.com", "83 99151-3570");
+		fc.adicionaProduto("Marcos", "Coxao de Frango", "Coxao de frango com cheddar", "2.50");
+		fc.adicionaProduto("Marcos", "Refrigerante", "Refrigerante (lata)", "2.50");
+		fc.adicionaCombo("Marcos", "Coxao com batata", "Coxao de frango com batata frita", "0.30", 
+				"Coxao de Frango - Coxao de frango com cheddar, Refrigerante - Refrigerante (lata)");
+		fc.editaCombo("Coxao com batata", "Coxao de frango com batata frita", "Marcos", "0.20");
+		assertEquals("Coxao com batata - Coxao de frango com batata frita - R$4,00", fc.exibeProduto("Coxao com batata", 
+				"Coxao de frango com batata frita", "Marcos"));
+	}
+	
+	@Test
+	public void testEditaComboInvalido() {
+		fc.adicionaFornecedor("Marcos", "marcos@gmail.com", "83 99151-3570");
+		fc.adicionaProduto("Marcos", "Coxao de Frango", "Coxao de frango com cheddar", "2.50");
+		fc.adicionaProduto("Marcos", "Refrigerante", "Refrigerante (lata)", "2.50");
+		fc.adicionaCombo("Marcos", "Coxao com batata", "Coxao de frango com batata frita", "0.30", 
+				"Coxao de Frango - Coxao de frango com cheddar, Refrigerante - Refrigerante (lata)");
+		
+		assertThrows(IllegalArgumentException.class, () -> fc.editaCombo("", "Coxao de frango com batata frita", "Marcos", "0.20"));
+		assertThrows(IllegalArgumentException.class, () -> fc.editaCombo("Coxao com batata", "", "Marcos", "0.20"));
+		assertThrows(IllegalArgumentException.class, () -> fc.editaCombo("Coxao com batata", "Coxao de frango com batata "
+				+ "frita", "", "0.20"));
+		assertThrows(IllegalArgumentException.class, () -> fc.editaCombo("Coxao com batata", "Coxao de frango com batata "
+				+ "frita", "Marcos", "0.00"));
+		assertThrows(IllegalArgumentException.class, () -> fc.editaCombo("Coxao com batata", "Coxao de frango com batata "
+				+ "frita", "Marcos", "1.00"));
+		assertThrows(IllegalArgumentException.class, () -> fc.editaCombo("Coxao e batata", "Coxao de frango e batata "
+				+ "frita", "Marcos", "0.20"));
+	}
+	
+	@Test
+	public void testRemoveComboValido() {
+		fc.adicionaFornecedor("Marcos", "marcos@gmail.com", "83 99151-3570");
+		fc.adicionaProduto("Marcos", "Coxao de Frango", "Coxao de frango com cheddar", "2.50");
+		fc.adicionaProduto("Marcos", "Refrigerante", "Refrigerante (lata)", "2.50");
+		fc.adicionaCombo("Marcos", "Coxao com batata", "Coxao de frango com batata frita", "0.30", 
+				"Coxao de Frango - Coxao de frango com cheddar, Refrigerante - Refrigerante (lata)");
+		fc.removeProduto("Coxao com batata", "Coxao de frango com batata frita", "Marcos");
+		assertTrue(!fc.getFornecedores().get("Marcos").getCombos().containsKey("Coxao com batataCoxao de frango com batata frita"));
+	}
+	
+	@Test
+	public void testRemoveComboInvalido() {
+		fc.adicionaFornecedor("Marcos", "marcos@gmail.com", "83 99151-3570");
+		fc.adicionaProduto("Marcos", "Coxao de Frango", "Coxao de frango com cheddar", "2.50");
+		fc.adicionaProduto("Marcos", "Refrigerante", "Refrigerante (lata)", "2.50");
+		fc.adicionaCombo("Marcos", "Coxao com batata", "Coxao de frango com batata frita", "0.30", 
+				"Coxao de Frango - Coxao de frango com cheddar, Refrigerante - Refrigerante (lata)");
+		assertThrows(IllegalArgumentException.class, () -> fc.removeProduto("", "Coxao de frango com batata frita", "Marcos"));
+		assertThrows(IllegalArgumentException.class, () -> fc.removeProduto("Coxao com batata", "", "Marcos"));
+		assertThrows(IllegalArgumentException.class, () -> fc.removeProduto("Coxao com batata", "Coxao de frango com batata frita", ""));
+		assertThrows(IllegalArgumentException.class, () -> fc.removeProduto("Coxao com batata", "Coxao de frango com batata frita", "Seu Olavo"));
+		assertThrows(IllegalArgumentException.class, () -> fc.removeProduto("Coxao e batata", "Coxao de frango e batata frita", "Marcos"));
 	}
 }

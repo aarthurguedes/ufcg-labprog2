@@ -7,7 +7,7 @@ import java.util.Map;
 
 import ferramentas.Adicionador;
 import ferramentas.Calculador;
-import validacao.VerificadorBase;
+import validacao.ValidadorBase;
 
 /**
 * Representação de um fornecedor de lanches, que possui nome (identificação única), email e telefone.
@@ -39,7 +39,7 @@ public class Fornecedor {
 	/**
 	* Objeto Verificador de parâmetros.
 	*/
-	private VerificadorBase vb = new VerificadorBase();
+	private ValidadorBase vb = new ValidadorBase();
 	/**
 	* Objeto adicionador de strings em listas.
 	*/
@@ -57,7 +57,7 @@ public class Fornecedor {
 	* @param telefone o telefone do fornecedor
 	*/
 	public Fornecedor(String nome, String email, String telefone) {
-		vb.verificaParametrosFornecedor(nome, email, telefone);
+		vb.validaFornecedor(nome, email, telefone);
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
@@ -146,7 +146,7 @@ public class Fornecedor {
 	* @param preco o preço do produto
 	*/
 	public void adicionarProduto(String nome, String descricao, String preco) {
-		vb.verificaParametrosAdicionarProduto(nome, descricao, preco);
+		vb.validaProduto(nome, descricao, preco);
 		produtosSimples.put((nome + descricao), new ProdutoSimples(preco, nome, descricao));
 	}
 	
@@ -158,7 +158,7 @@ public class Fornecedor {
 	* @return uma representação em String de um produto do fornecedor
 	*/
 	public String exibirProduto(String nome, String descricao) {
-		vb.verificaParametrosExibirProduto(nome, descricao, produtosSimples, combos); 
+		vb.validaExibicaoProduto(nome, descricao, produtosSimples, combos); 
 		if (produtosSimples.containsKey(nome + descricao)) {
 			return produtosSimples.get(nome + descricao).toString();
 		} else {
@@ -193,7 +193,7 @@ public class Fornecedor {
 	* @param novoPreco o novo preço do produto
 	*/
 	public void editarProduto(String nome, String descricao, String novoPreco) {
-		vb.verificaParametrosEditarProduto(nome, descricao, novoPreco, produtosSimples);
+		vb.validaEdicaoProduto(nome, descricao, novoPreco, produtosSimples);
 		produtosSimples.get(nome + descricao).setPreco(novoPreco);
 	}
 	
@@ -204,7 +204,7 @@ public class Fornecedor {
 	* @param descricao a descricao do produto
 	*/
 	public void removerProduto(String nome, String descricao) {
-		vb.verificaParametrosRemoverProduto(nome, descricao, produtosSimples, combos);
+		vb.validaRemocaoProduto(nome, descricao, produtosSimples, combos);
 		if (produtosSimples.containsKey(nome + descricao)) {
 			produtosSimples.remove(nome + descricao);
 		} else {
@@ -243,10 +243,11 @@ public class Fornecedor {
 	* @param produtos os produtos que vão compor o combo
 	*/
 	public void adicionarCombo(String nome, String descricao, String fator, String produtos) {
-		vb.verificaParametrosAdicionarCombo(nome, descricao, fator, produtos, combos);
+		vb.validaCadastramentoCombo(nome, descricao, fator, produtos, combos);
 		String keyProduto1 = pegaKeyProduto(1, produtos);
 		String keyProduto2 = pegaKeyProduto(2, produtos);
-		vb.verificaProdutosCombo(produtos, keyProduto1, keyProduto2, produtosSimples, combos);
+		vb.validaProdutosDoCombo(produtos, keyProduto1, keyProduto2, produtosSimples, combos);
+		
 		String keyCombo = nome + descricao;
 		combos.put((keyCombo), new Combo(nome, descricao, fator, produtos));
 		combos.get(keyCombo).setPreco(c.calculaPrecoCombo(fator, produtos, produtosSimples, keyProduto1, keyProduto2));
@@ -262,7 +263,7 @@ public class Fornecedor {
 	* @param novoFator o novo fator de desconto do combo
 	*/
 	public void editarCombo(String nome, String descricao, String novoFator) {
-		vb.verificaParametrosEditarCombo(nome, descricao, novoFator, combos);
+		vb.validaEdicaoCombo(nome, descricao, novoFator, combos);
 		combos.get(nome + descricao).setPreco(c.calculaNovoPrecoCombo(nome, descricao, novoFator, combos));
 		combos.get(nome + descricao).setFator(novoFator);
 	}

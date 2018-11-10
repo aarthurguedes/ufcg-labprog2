@@ -7,7 +7,7 @@ import java.util.Map;
 
 import ferramentas.Adicionador;
 import lab5.Cliente;
-import validacao.VerificadorControllers;
+import validacao.ValidadorControllers;
 
 /**
 * Representação de um controlador para os clientes, responsável por cadastrá-los, representá-los textualmente, editar os seus cadastros
@@ -24,7 +24,7 @@ public class ClienteController {
 	/**
 	* Objeto Verificador de parãmetros.
 	*/
-	private VerificadorControllers vc;
+	private ValidadorControllers vc;
 	/**
 	* Objeto adicionador de strings em listas.
 	*/
@@ -36,7 +36,7 @@ public class ClienteController {
 	*/
 	public ClienteController() {
 		this.clientes = new HashMap<>();
-		this.vc = new VerificadorControllers();
+		this.vc = new ValidadorControllers();
 		this.a = new Adicionador();
 	}
 	
@@ -64,7 +64,7 @@ public class ClienteController {
 	* @return o cpf do cliente
 	*/
 	public String adicionaCliente(String cpf, String nome, String email, String localizacao) {
-		vc.verificaParametrosAdicionaCliente(cpf, nome, email, localizacao, clientes);
+		vc.validaCadastramentoCliente(cpf, nome, email, localizacao, clientes);
 		clientes.put(cpf, new Cliente(cpf, nome, email, localizacao));
 		return cpf;
 	}
@@ -110,7 +110,7 @@ public class ClienteController {
 	* @param novoValor o novo valor do atributo que vai ser editado
 	*/
 	public void editaCliente(String cpf, String atributo, String novoValor) {
-		vc.verificaParametrosEditaCliente(cpf, atributo, novoValor, clientes); 
+		vc.validaEdicaoCliente(cpf, atributo, novoValor, clientes); 
 		
 		if (atributo.equals("nome")) {
 			clientes.get(cpf).setNome(novoValor);

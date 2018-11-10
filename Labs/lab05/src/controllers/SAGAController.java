@@ -2,7 +2,7 @@ package controllers;
 
 import lab5.Compra;
 import lab5.Conta;
-import validacao.VerificadorServico;
+import validacao.ValidadorServicos;
 
 /**
 * Representação de um controlador intermediário, que associa os controladores de Cliente e Fornecedor.
@@ -22,7 +22,7 @@ public class SAGAController {
 	/**
 	* Verificador de parâmetros.
 	*/
-	private VerificadorServico vs;
+	private ValidadorServicos vs;
 	
 	/**
 	* Constrói o controlador a partir dos controladores associados.
@@ -31,7 +31,7 @@ public class SAGAController {
 	public SAGAController() {
 		this.cc = new ClienteController();
 		this.fc = new FornecedorController();
-		this.vs = new VerificadorServico();
+		this.vs = new ValidadorServicos();
 	}
 	
 	/**
@@ -293,12 +293,15 @@ public class SAGAController {
 	* @param descProd a descrição do produto
 	*/
 	public void adicionaCompra(String cpf, String fornecedor, String data, String nomeProd, String descProd) {
-		vs.verificaAdicionaCompra(cpf, fornecedor, data, nomeProd, descProd, cc, fc);
+		vs.validaCompra(cpf, fornecedor, data, nomeProd, descProd, cc, fc);
+		
 		String idProd = nomeProd +  " - " + descProd;
 		String precoProd = pegaPrecoProduto(fornecedor, nomeProd, descProd);
+		
 		if (!cc.getClientes().get(cpf).getContas().containsKey(fornecedor)) {
 			cc.getClientes().get(cpf).getContas().put(fornecedor, new Conta());
 		}
+		
 		Compra c = new Compra(data, idProd, precoProd);
 		cc.getClientes().get(cpf).getContas().get(fornecedor).getCompras().add(c);
 	}
@@ -311,7 +314,7 @@ public class SAGAController {
 	* @param fornecedor o nome do fornecedor
 	*/
 	public String getDebito(String cpf, String fornecedor) {
-		vs.verificaGetDebito(cpf, fornecedor, cc, fc);
+		vs.validaDebito(cpf, fornecedor, cc, fc);
 		return cc.getClientes().get(cpf).getContas().get(fornecedor).getDebito();
 	}
 	
@@ -323,7 +326,7 @@ public class SAGAController {
 	* @param fornecedor o nome do fornecedor
 	*/
 	public String exibeContas(String cpf, String fornecedor) {
-		vs.verificaExibeContas(cpf, fornecedor, cc, fc);
+		vs.validaContasClienteFornecedor(cpf, fornecedor, cc, fc);
 		return cc.getClientes().get(cpf).exibirConta(fornecedor);
 	}
 	
@@ -334,7 +337,7 @@ public class SAGAController {
 	* @param cpf o cpf do cliente
 	*/
 	public String exibeContasClientes(String cpf) {
-		vs.verificaExibeContasCliente(cpf, cc);
+		vs.validaContasCliente(cpf, cc);
 		return cc.getClientes().get(cpf).exibirContas();
 	}
 	
@@ -345,7 +348,7 @@ public class SAGAController {
 	* @param fornecedor o nome do fornecedor
 	*/
 	public void realizaPagamento(String cpf, String fornecedor) {
-		vs.verificaRealizaPagamento(cpf, fornecedor, cc, fc);
+		vs.validaPagamento(cpf, fornecedor, cc, fc);
 		cc.getClientes().get(cpf).realizarPagamento(fornecedor);
 	}
 }

@@ -13,14 +13,14 @@ public class Facade {
 	/**
 	* Controlador intermediário entre os controladores de Cliente e Fornecedor.
 	*/
-	private SAGAController s;
+	private SAGAController sc;
 	
 	/**
 	* Constrói a fachada do sistema, inicializando o controlador do sistema.
 	*
 	*/
 	public Facade() {
-		s = new SAGAController();
+		sc = new SAGAController();
 	}
 	
 	/**
@@ -34,7 +34,7 @@ public class Facade {
 	* @return o cpf do cliente
 	*/
 	public String adicionaCliente(String cpf, String nome, String email, String localizacao) {
-		return s.adicionaCliente(cpf, nome, email, localizacao);
+		return sc.adicionaCliente(cpf, nome, email, localizacao);
 	}
 	
 	/**
@@ -45,7 +45,7 @@ public class Facade {
 	* @return uma representação em String do cliente, se o mesmo estiver cadastrado.
 	*/
 	public String exibeCliente(String cpf) {
-		return s.exibeCliente(cpf);
+		return sc.exibeCliente(cpf);
 	}
 	
 	/**
@@ -54,7 +54,7 @@ public class Facade {
 	* @return uma representação em String dos clientes cadastrados no sistema
 	*/
 	public String exibeClientes() {
-		return s.exibeClientes();
+		return sc.exibeClientes();
 	}
 	
 	/**
@@ -66,7 +66,7 @@ public class Facade {
 	* @param novoValor o novo valor do atributo que vai ser editado
 	*/
 	public void editaCliente(String cpf, String atributo, String novoValor) {
-		s.editaCliente(cpf, atributo, novoValor);
+		sc.editaCliente(cpf, atributo, novoValor);
 	}
 	
 	/**
@@ -76,7 +76,7 @@ public class Facade {
 	* @param cpf o cpf do cliente
 	*/
 	public void removeCliente(String cpf) {
-		s.removeCliente(cpf);
+		sc.removeCliente(cpf);
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class Facade {
 	* @return o nome do cliente;
 	*/
 	public String adicionaFornecedor(String nome, String email, String telefone) {
-		return s.adicionaFornecedor(nome, email, telefone);
+		return sc.adicionaFornecedor(nome, email, telefone);
 	}
 	
 	/**
@@ -100,7 +100,7 @@ public class Facade {
 	* @return uma representação em String do fornecedor, se o mesmo estiver cadastrado.
 	*/
 	public String exibeFornecedor(String nome) {
-		return s.exibeFornecedor(nome);
+		return sc.exibeFornecedor(nome);
 	}
 	
 	/**
@@ -109,7 +109,7 @@ public class Facade {
 	* @return uma representação em String dos fornecedores cadastrados
 	*/
 	public String exibeFornecedores() {
-		return s.exibeFornecedores();
+		return sc.exibeFornecedores();
 	}
 	
 	/**
@@ -121,7 +121,7 @@ public class Facade {
 	* @param novoValor o novo valor do atributo
 	*/
 	public void editaFornecedor(String nome, String atributo, String novoValor) {
-		s.editaFornecedor(nome, atributo, novoValor);
+		sc.editaFornecedor(nome, atributo, novoValor);
 	}
 	
 	/**
@@ -131,7 +131,7 @@ public class Facade {
 	* @param nome o nome do fornecedor
 	*/
 	public void removeFornecedor(String nome) {
-		s.removeFornecedor(nome);
+		sc.removeFornecedor(nome);
 	}
 	
 	/**
@@ -144,7 +144,7 @@ public class Facade {
 	* @param preco o preço do produto
 	*/
 	public void adicionaProduto(String fornecedor, String nome, String descricao, String preco) {
-		s.adicionaProduto(fornecedor, nome, descricao, preco);
+		sc.adicionaProduto(fornecedor, nome, descricao, preco);
 	}
 	
 	/**
@@ -156,7 +156,7 @@ public class Facade {
 	* @return uma representação em String do produto
 	*/
 	public String exibeProduto(String nome, String descricao, String fornecedor) {
-		return s.exibeProduto(nome, descricao, fornecedor);
+		return sc.exibeProduto(nome, descricao, fornecedor);
 	}
 	
 	/**
@@ -166,7 +166,7 @@ public class Facade {
 	* @return uma representação em String dos produtos do fornecedor
 	*/
 	public String exibeProdutosFornecedor(String fornecedor) {
-		return s.exibeProdutosFornecedor(fornecedor);
+		return sc.exibeProdutosFornecedor(fornecedor);
 	}
 	
 	/**
@@ -175,7 +175,7 @@ public class Facade {
 	* @return uma representação em String dos produtos dos fornecedores
 	*/
 	public String exibeProdutos() {
-		return s.exibeProdutos();
+		return sc.exibeProdutos();
 	}
 	
 	/**
@@ -187,7 +187,7 @@ public class Facade {
 	* @param novoPreco o novo preço do produto
 	*/
 	public void editaProduto(String nome, String descricao, String fornecedor, String novoPreco) {
-		s.editaProduto(nome, descricao, fornecedor, novoPreco);
+		sc.editaProduto(nome, descricao, fornecedor, novoPreco);
 	}
 	
 	/**
@@ -198,7 +198,7 @@ public class Facade {
 	* @param fornecedor o nome do fornecedor
 	*/
 	public void removeProduto(String nome, String descricao, String fornecedor) {
-		s.removeProduto(nome, descricao, fornecedor);
+		sc.removeProduto(nome, descricao, fornecedor);
 	}
 	
 	/**
@@ -212,7 +212,7 @@ public class Facade {
 	* @param produtos os produtos que vão compor o combo
 	*/
 	public void adicionaCombo(String fornecedor, String nome, String descricao, String fator, String produtos) {
-		s.adicionaCombo(fornecedor, nome, descricao, fator, produtos);
+		sc.adicionaCombo(fornecedor, nome, descricao, fator, produtos);
 	}
 	
 	/**
@@ -225,7 +225,7 @@ public class Facade {
 	* @param novoFator o novo fator de desconto do combo
 	*/
 	public void editaCombo(String nome, String descricao, String fornecedor, String novoFator) {
-		s.editaCombo(nome, descricao, fornecedor, novoFator);
+		sc.editaCombo(nome, descricao, fornecedor, novoFator);
 	}
 	
 	/**
@@ -238,7 +238,7 @@ public class Facade {
 	* @param descProd a descrição do produto
 	*/
 	public void adicionaCompra(String cpf, String fornecedor, String data, String nomeProd, String descProd) {
-		s.adicionaCompra(cpf, fornecedor, data, nomeProd, descProd);
+		sc.adicionaCompra(cpf, fornecedor, data, nomeProd, descProd);
 	}
 	
 	/**
@@ -249,7 +249,7 @@ public class Facade {
 	* @param fornecedor o nome do fornecedor
 	*/
 	public String getDebito(String cpf, String fornecedor) {
-		return s.getDebito(cpf, fornecedor);
+		return sc.getDebito(cpf, fornecedor);
 	}
 	
 	/**
@@ -260,7 +260,7 @@ public class Facade {
 	* @param fornecedor o nome do fornecedor
 	*/
 	public String exibeContas(String cpf, String fornecedor) {
-		return s.exibeContas(cpf, fornecedor);
+		return sc.exibeContas(cpf, fornecedor);
 	}
 	
 	/**
@@ -270,7 +270,7 @@ public class Facade {
 	* @param cpf o cpf do cliente
 	*/
 	public String exibeContasClientes(String cpf) {
-		return s.exibeContasClientes(cpf);
+		return sc.exibeContasClientes(cpf);
 	}
 	
 	/**
@@ -280,7 +280,7 @@ public class Facade {
 	* @param fornecedor o nome do fornecedor
 	*/
 	public void realizaPagamento(String cpf, String fornecedor) {
-		s.realizaPagamento(cpf, fornecedor);
+		sc.realizaPagamento(cpf, fornecedor);
 	}
 	
 	public static void main(String[] args) {

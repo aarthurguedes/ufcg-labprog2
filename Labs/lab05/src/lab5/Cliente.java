@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import ferramentas.Adicionador;
-import validacao.VerificadorBase;
+import validacao.ValidadorBase;
 
 /**
 * Representação de um cliente, que possui cpf (identificação única), nome, email e local de trabalho (localização).
@@ -38,7 +38,7 @@ public class Cliente {
 	/**
 	* Objeto Verificador de parâmetros.
 	*/
-	private VerificadorBase vb = new VerificadorBase();
+	private ValidadorBase vb = new ValidadorBase();
 	/**
 	* Objeto adicionador de strings em listas.
 	*/
@@ -53,7 +53,7 @@ public class Cliente {
 	* @param localizacao o local de trabalho do cliente
 	*/
 	public Cliente(String cpf, String nome, String email, String localizacao) {			
-		vb.verificaParametrosCliente(cpf, nome, email, localizacao);
+		vb.validaCliente(cpf, nome, email, localizacao);
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;
@@ -139,7 +139,7 @@ public class Cliente {
 	* @return uma representação em String das contas do cliente com um fornecedor
 	*/
 	public String exibirConta(String fornecedor) {
-		vb.verificaParametroExibirConta(fornecedor, contas);
+		vb.validaExibicaoConta(fornecedor, contas);
 		String retorno = "Cliente: " + this.nome + " | " + fornecedor + " | ";
 		
 		for (Compra c: contas.get(fornecedor).getCompras()) {
@@ -178,7 +178,7 @@ public class Cliente {
 	* @param fornecedor o nome do fornecedor
 	*/
 	public void realizarPagamento(String fornecedor) {
-		vb.verificaParametroRealizarPagamento(fornecedor, contas);
+		vb.validaPagamento(fornecedor, contas);
 		contas.remove(fornecedor);
 	}
 	

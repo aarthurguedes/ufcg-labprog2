@@ -1,6 +1,6 @@
 package abstrato;
 
-import validacao.VerificadorBase;
+import validacao.ValidadorBase;
 
 /**
 * Representação de um produto abstrato, que possui nome e descrição, além do preço. 
@@ -24,7 +24,7 @@ public abstract class ProdutoAbstrato {
 	/**
 	* Objeto Verificador de parâmetros.
 	*/
-	protected VerificadorBase vb = new VerificadorBase();
+	protected ValidadorBase vb = new ValidadorBase();
 
 	/**
 	 * @return o preço do produto

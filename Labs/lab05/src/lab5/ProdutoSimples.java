@@ -17,7 +17,7 @@ public class ProdutoSimples extends ProdutoAbstrato {
 	* @param descricao a descrição do produto
 	*/
 	public ProdutoSimples(String preco, String nome, String descricao) {
-		vb.verificaParametrosProduto(nome, descricao, preco); 
+		vb.validaProduto(nome, descricao, preco); 
 		this.preco = preco;
 		this.nome = nome;
 		this.descricao = descricao;
