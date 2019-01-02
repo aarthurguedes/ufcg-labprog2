@@ -76,7 +76,7 @@ public abstract class ProdutoAbstrato {
 	@Override
 	public String toString() {
 		String precoFormatado = String.format("%.2f", Float.parseFloat(preco));
-		return this.nome + " - " + this.descricao + " - " + "R$" + precoFormatado;
+		return this.nome + " - " + this.descricao + " - " + "R$" + precoFormatado.replace(".", ",");
 	}
 
 	/**

@@ -1,6 +1,5 @@
-package lab5;
+package controllers;
 
-import controllers.SAGAController;
 import easyaccept.EasyAccept;
 
 /**
@@ -284,7 +283,7 @@ public class Facade {
 	}
 	
 	public static void main(String[] args) {
-		args = new String[] {"lab5.Facade", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt", 
+		args = new String[] {"controllers.Facade", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt", 
 				"testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt", "testes_aceitacao/use_case_5.txt", 
 				"testes_aceitacao/use_case_6.txt"};
 		EasyAccept.main(args);
